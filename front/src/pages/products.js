@@ -8,6 +8,7 @@ import Navbar from "../components/navbar";
 
 import Footer from "../components/footer";
 import Search from "../components/search";
+import MiniProducts from "../components/miniProducts";
 function Products() {
   return (
     <>
@@ -18,7 +19,7 @@ function Products() {
           <h1>Our Products</h1>
           <p>Discover a collection that redefines elegance and comfort.</p>
         </header>
-
+        <MiniProducts />
         <section className="product-list">
           <div className="product-card">
             <img src={sofa} alt="Modern Sofa Set" />

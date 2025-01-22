@@ -1,0 +1,57 @@
+.icons-container {
+  display: flex;
+  min-height: 50vh;
+}
+
+.side-navigation {
+  width: 220px;
+  background: #333;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.side-navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-navigation li {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.side-navigation li:hover {
+  color: #f4b400;
+}
+
+.side-navigation .icon {
+  margin-right: 12px;
+  font-size: 2.3rem;
+  vertical-align: middle;
+}
+
+.products-main {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.products-main h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.products-main p {
+  font-size: 1.2rem;
+  color: #666;
+}
