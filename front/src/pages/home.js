@@ -10,11 +10,13 @@ import recliner from "../assets/images/recliner.jpg";
 import sofa from "../assets/images/sofa.jpg";
 import wooden from "../assets/images/wooden.jpg";
 import Footer from "../components/footer";
+import Search from "../components/search";
 
 function Home() {
   return (
     <>
       <Navbar />
+      <Search />
       <div className="home-container">
         <header className="hero-section">
           <h1 className="hero-title">Welcome to ValueMart Furniture</h1>

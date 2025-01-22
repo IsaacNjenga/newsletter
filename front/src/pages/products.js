@@ -7,10 +7,12 @@ import "../App.css";
 import Navbar from "../components/navbar";
 
 import Footer from "../components/footer";
+import Search from "../components/search";
 function Products() {
   return (
     <>
       <Navbar />
+      <Search />
       <div className="products-container">
         <header className="products-header">
           <h1>Our Products</h1>

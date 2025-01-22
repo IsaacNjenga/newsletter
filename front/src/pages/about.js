@@ -4,6 +4,7 @@ import "../assets/css/about.css";
 import "../App.css";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import Search from "../components/search";
 
 function About() {
   return (

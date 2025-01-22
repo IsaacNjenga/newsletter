@@ -3,10 +3,12 @@ import "../assets/css/contacts.css";
 import "../App.css";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
+import Search from "../components/search";
 function Contact() {
   return (
     <>
       <Navbar />
+      <Search />
       <div className="contact-container">
         <header className="contact-header">
           <h1>Contact Us</h1>

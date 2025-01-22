@@ -12,7 +12,11 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="logo">
-        <span className="highlight">Easy</span><span className="highlight2"><i>Deal</i></span> Furnitures
+        <span className="highlight">Easy</span>
+        <span className="highlight2">
+          <i>Deal</i>
+        </span>{" "}
+        Furnitures
       </div>
       <span className="menu-toggle" onClick={toggleMenu}>
         ☰
@@ -22,13 +26,13 @@ function Navbar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/about">About Us</Link>
-        </li>
-        <li>
           <Link to="/products">Products</Link>
         </li>
         <li>
           <Link to="/offers">Offers</Link>
+        </li>
+        <li>
+          <Link to="/about">About Us</Link>
         </li>
         <li>
           <Link to="/contact">Contact Us</Link>

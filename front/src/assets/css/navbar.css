@@ -6,6 +6,7 @@
   background: #333;
   color: #fff;
   position: relative;
+  z-index: 1000;
 }
 
 .navbar .logo {
