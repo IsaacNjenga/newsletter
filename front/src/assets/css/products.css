@@ -1,0 +1,19 @@
+.products-container {
+  padding: 20px;
+}
+
+.products-header {
+  text-align: center;
+  background-color: #28a745;
+  color: #fff;
+  padding: 40px 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+}
+
+.special-note {
+  text-align: center;
+  margin-top: 20px;
+  font-style: italic;
+  color: #666;
+}
