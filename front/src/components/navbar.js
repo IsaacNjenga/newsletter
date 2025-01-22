@@ -11,7 +11,9 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="logo">ValueMart</div>
+      <div className="logo">
+        <span className="highlight">Easy</span><span className="highlight2"><i>Deal</i></span> Furnitures
+      </div>
       <span className="menu-toggle" onClick={toggleMenu}>
         ☰
       </span>

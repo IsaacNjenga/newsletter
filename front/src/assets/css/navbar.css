@@ -1,69 +1,77 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background: #333;
-    color: #fff;
-    position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #333;
+  color: #fff;
+  position: relative;
+}
+
+.navbar .logo {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 55px;
+  margin-right: 20px;
+}
+
+.highlight {
+  color: blue;
+}
+
+.highlight2 {
+  color: red;
+}
+
+.navbar .nav-links li {
+  display: inline;
+}
+
+.navbar .nav-links a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.navbar .nav-links a:hover {
+  color: #f4b400;
+}
+
+/* Responsive Design */
+.navbar .menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
   }
-  
-  .navbar .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-  }
-  
+
   .navbar .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-  }
-  
-  .navbar .nav-links li {
-    display: inline;
-  }
-  
-  .navbar .nav-links a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  
-  .navbar .nav-links a:hover {
-    color: #f4b400;
-  }
-  
-  /* Responsive Design */
-  .navbar .menu-toggle {
+    flex-direction: column;
+    gap: 10px;
     display: none;
-    font-size: 1.8rem;
-    cursor: pointer;
+    width: 100%;
+    background: #444;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    padding: 10px;
   }
-  
-  @media (max-width: 768px) {
-    .navbar {
-      flex-wrap: wrap;
-    }
-  
-    .navbar .nav-links {
-      flex-direction: column;
-      gap: 10px;
-      display: none;
-      width: 100%;
-      background: #444;
-      position: absolute;
-      top: 60px;
-      left: 0;
-      padding: 10px;
-    }
-  
-    .navbar .nav-links.open {
-      display: flex;
-    }
-  
-    .navbar .menu-toggle {
-      display: block;
-      color: #fff;
-    }
+
+  .navbar .nav-links.open {
+    display: flex;
   }
-  
+
+  .navbar .menu-toggle {
+    display: block;
+    color: #fff;
+  }
+}

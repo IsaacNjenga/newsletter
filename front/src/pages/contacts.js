@@ -19,13 +19,14 @@ function Contact() {
         <section className="contact-info">
           <h2>Contact Information</h2>
           <p>
-            <strong>Phone:</strong> +254 712 345 678
+            <strong>Phone:</strong> +254 720 731 982
           </p>
           <p>
-            <strong>Email:</strong> support@valuemart.com
+            <strong>Email:</strong> valuemart.kenya@gmail.com
           </p>
           <p>
-            <strong>Address:</strong> ValueMart Plaza, Nairobi, Kenya
+            <strong>Address:</strong> Ngara Rd <i>(next to Sarakasi Dome)</i>,
+            Nairobi, Kenya,
           </p>
         </section>
 
