@@ -11,13 +11,17 @@
   border-radius: 8px;
 }
 
-.about-mission,
-.about-values {
+.about-mission {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 20px;
   margin: 20px 0;
+}
+
+.about-values {
+  margin: 20px 0;
+  text-align: left;
 }
 
 .about-mission .text-content {

@@ -7,15 +7,13 @@ import {
   faBars,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import { MdElectricalServices } from "react-icons/md"; // Another alternative
+import { MdElectricalServices } from "react-icons/md";
 import { PiOfficeChairLight } from "react-icons/pi";
-import { PiDeskLight } from "react-icons/pi";
 import "../assets/css/miniproducts.css";
 import OfficeChairs from "./officeChairs";
 import HomeFurniture from "./homeFurniture";
 import Electronics from "./electronics";
 import SecondHandItems from "./secondHandItems";
-import OfficeDesks from "./officeDesks";
 import Accessories from "./accessories";
 
 function MiniProducts() {
@@ -34,8 +32,6 @@ function MiniProducts() {
       setDisplay(<Electronics />);
     } else if (setter === "second-hand-items") {
       setDisplay(<SecondHandItems />);
-    } else if (setter === "office-desks") {
-      setDisplay(<OfficeDesks />);
     } else if (setter === "accessories") {
       setDisplay(<Accessories />);
     }
@@ -67,10 +63,6 @@ function MiniProducts() {
             {isExpanded && (
               <p className="icon-description">Second-Hand Items</p>
             )}
-          </li>
-          <li onClick={() => displaySet("office-desks")}>
-            <PiDeskLight className="icon" />
-            {isExpanded && <p className="icon-description">Office Desks</p>}
           </li>
           <li onClick={() => displaySet("accessories")}>
             <MdElectricalServices className="icon" />
