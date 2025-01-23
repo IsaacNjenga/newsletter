@@ -23,7 +23,6 @@ function Home() {
           <p className="hero-subtitle">Exclusive Deals on Elegant Furniture</p>
           <button className="cta-button">Subscribe Now</button>
         </header>
-
         <section className="new-arrivals">
           <h2 className="section-title">New Arrivals</h2>
           <div className="product-grid">
