@@ -13,14 +13,14 @@ function Products() {
   return (
     <>
       <Navbar />
-      <Search />
       <div className="products-container">
         <header className="products-header">
           <h1>Our Products</h1>
           <p>Discover a collection that redefines elegance and comfort.</p>
         </header>
+        <Search />
         <MiniProducts />
-        <section className="product-list">
+        {/* <section className="product-list">
           <div className="product-card">
             <img src={sofa} alt="Modern Sofa Set" />
             <h3>Modern Sofa Set</h3>
@@ -36,7 +36,7 @@ function Products() {
             <h3>Recliner Chair</h3>
             <p>Ksh. 49,900</p>
           </div>
-        </section>
+        </section> */}
 
         <section className="special-note">
           <p>

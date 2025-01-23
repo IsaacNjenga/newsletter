@@ -1,52 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCouch,
   faTv,
   faRecycle,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
-import { HiDesktopComputer } from "react-icons/hi"; // Example alternative icon
 import { MdElectricalServices } from "react-icons/md"; // Another alternative
 import { PiOfficeChairLight } from "react-icons/pi";
 import { PiDeskLight } from "react-icons/pi";
 import "../assets/css/miniproducts.css";
+import OfficeChairs from "./officeChairs";
+import HomeFurniture from "./homeFurniture";
+import Electronics from "./electronics";
+import SecondHandItems from "./secondHandItems";
+import OfficeDesks from "./officeDesks";
+import Accessories from "./accessories";
 
 function MiniProducts() {
+  const [isExpanded, setIsExpanded] = useState(true);
+  const [display, setDisplay] = useState(<OfficeChairs />);
+  const toggleNavbar = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const displaySet = (setter) => {
+    if (setter === "office-chairs") {
+      setDisplay(<OfficeChairs />);
+    } else if (setter === "home-furniture") {
+      setDisplay(<HomeFurniture />);
+    } else if (setter === "electronics") {
+      setDisplay(<Electronics />);
+    } else if (setter === "second-hand-items") {
+      setDisplay(<SecondHandItems />);
+    } else if (setter === "office-desks") {
+      setDisplay(<OfficeDesks />);
+    } else if (setter === "accessories") {
+      setDisplay(<Accessories />);
+    }
+  };
+
   return (
-    <div className="icons-container">
-      <nav className="side-navigation">
+    <div className="mini-products-container">
+      <button className="mini-products-toggle-btn" onClick={toggleNavbar}>
+        <FontAwesomeIcon icon={faBars} />
+      </button>
+      <nav
+        className={`side-navigation ${isExpanded ? "expanded" : "collapsed"}`}
+      >
         <ul>
-          <li>
+          <li onClick={() => displaySet("office-chairs")}>
             <PiOfficeChairLight className="icon" />
-            Office Chairs
+            {isExpanded && <p className="icon-description">Office Chairs</p>}
           </li>
-          <li>
+          <li onClick={() => displaySet("home-furniture")}>
             <FontAwesomeIcon icon={faCouch} className="icon" />
-            Home Furniture
+            {isExpanded && <p className="icon-description">Home Furniture</p>}
           </li>
-          <li>
+          <li onClick={() => displaySet("electronics")}>
             <FontAwesomeIcon icon={faTv} className="icon" />
-            Electronics
+            {isExpanded && <p className="icon-description">Electronics</p>}
           </li>
-          <li>
+          <li onClick={() => displaySet("second-hand-items")}>
             <FontAwesomeIcon icon={faRecycle} className="icon" />
-            Second-Hand Items
+            {isExpanded && (
+              <p className="icon-description">Second-Hand Items</p>
+            )}
           </li>
-          <li>
+          <li onClick={() => displaySet("office-desks")}>
             <PiDeskLight className="icon" />
-            Office Desks
+            {isExpanded && <p className="icon-description">Office Desks</p>}
           </li>
-          <li>
+          <li onClick={() => displaySet("accessories")}>
             <MdElectricalServices className="icon" />
-            Accessories
+            {isExpanded && <p className="icon-description">Accessories</p>}
           </li>
         </ul>
       </nav>
-      <main className="products-main">
-        <h2>Select a Category</h2>
-        <p>Explore products from our wide range of categories!</p>
-        {/* Dynamic product display can go here */}
-      </main>
+      {display}
     </div>
   );
 }
