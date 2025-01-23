@@ -8,18 +8,21 @@ import "../assets/css/search.css";
 function Search() {
   const [search, setSearch] = useState("");
   return (
-    <div className="search-container">
-      <form className="search-form">
-        <InputGroup>
-          <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
-          <Form.Control
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="I am looking for..."
-            className="search-bar"
-          />
-        </InputGroup>
-      </form>
-    </div>
+    <>
+      <div className="search-container">
+        <form className="search-form">
+          <InputGroup>
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
+            <Form.Control
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="I am looking for..."
+              className="search-bar"
+            />
+          </InputGroup>
+        </form>
+      </div>
+      {search}
+    </>
   );
 }
 

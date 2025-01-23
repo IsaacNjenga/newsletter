@@ -6,7 +6,7 @@
   height: 100%;
   z-index: 1100;
   display: flex;
-  padding: 0px 0px;
+  padding: 5px 0px;
   align-items: flex-start;
   margin: auto;
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -17,8 +17,8 @@
   background-color: #333333e9;
   color: #fff;
   height: 100%;
-  width: 200px;
-  padding: 20px;
+  width: 210px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
@@ -27,7 +27,8 @@
 }
 
 .side-navigation.collapsed {
-  width: 25px;
+  width: 39px;
+  padding: 8px;
 }
 
 .side-navigation ul {
@@ -39,14 +40,17 @@
 .side-navigation li {
   display: flex;
   align-items: center;
-  margin: 25px 0;
-  font-size: 1.123rem;
+  margin: 18px 0;
+  padding: 3px 8px;
+  font-size: 1.06rem;
   transition: color 0.3s;
   cursor: pointer;
+  border-radius: 12px;
 }
 
 .side-navigation li:hover {
   color: #f4b400;
+  background-color: rgba(0, 0, 0, 0.224);
 }
 
 .side-navigation .icon {
@@ -56,6 +60,14 @@
   flex-direction: column;
   margin-right: 12px;
   padding: auto;
+}
+
+.side-navigation.collapsed .icon {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 10px;
 }
 
 .icon-description {
@@ -71,14 +83,12 @@
 
 /* Toggle Button */
 .mini-products-toggle-btn {
-  position: fixed;
-  top: 84px;
-  left: 32px;
-  z-index: 1100;
   background-color: #33333392;
   color: #fff;
   border: none;
   border-radius: 50%;
+  margin: 0;
+  padding: 0;
   width: 40px;
   height: 40px;
   display: flex;
@@ -90,4 +100,5 @@
 
 .mini-products-toggle-btn:hover {
   background-color: #000000;
+  color: #f4b400;
 }

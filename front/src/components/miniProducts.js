@@ -5,6 +5,7 @@ import {
   faTv,
   faRecycle,
   faBars,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { MdElectricalServices } from "react-icons/md"; // Another alternative
 import { PiOfficeChairLight } from "react-icons/pi";
@@ -42,13 +43,13 @@ function MiniProducts() {
 
   return (
     <div className="mini-products-container">
-      <button className="mini-products-toggle-btn" onClick={toggleNavbar}>
-        <FontAwesomeIcon icon={faBars} />
-      </button>
       <nav
         className={`side-navigation ${isExpanded ? "expanded" : "collapsed"}`}
       >
         <ul>
+          <button className="mini-products-toggle-btn" onClick={toggleNavbar}>
+            <FontAwesomeIcon icon={isExpanded ? faTimes : faBars} />
+          </button>
           <li onClick={() => displaySet("office-chairs")}>
             <PiOfficeChairLight className="icon" />
             {isExpanded && <p className="icon-description">Office Chairs</p>}
