@@ -17,7 +17,7 @@ function Products() {
         </header>
         <Search />
         <MiniProducts />
-        <br />
+        
         <section className="special-note">
           <p>
             Can't find what you're looking for? We also take custom orders to

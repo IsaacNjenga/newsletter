@@ -66,7 +66,7 @@ function Accessories() {
   return (
     <>
       <div className="product-page-container">
-        <h1 className="product-page-title">Office Furniture</h1>
+        <h1 className="product-page-title">Accessories</h1>
         <div className="product-page-list">
           {data.map((d) => (
             <div key={d.id} className="product-page-card">

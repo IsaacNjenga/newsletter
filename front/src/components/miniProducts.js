@@ -10,7 +10,7 @@ import {
 import { MdElectricalServices } from "react-icons/md";
 import { PiOfficeChairLight } from "react-icons/pi";
 import "../assets/css/miniproducts.css";
-import OfficeChairs from "./officeChairs";
+import OfficeChairs from "./officeFurniture";
 import HomeFurniture from "./homeFurniture";
 import Electronics from "./electronics";
 import SecondHandItems from "./secondHandItems";
@@ -48,7 +48,7 @@ function MiniProducts() {
           </button>
           <li onClick={() => displaySet("office-chairs")}>
             <PiOfficeChairLight className="icon" />
-            {isExpanded && <p className="icon-description">Office Chairs</p>}
+            {isExpanded && <p className="icon-description">Office Furniture</p>}
           </li>
           <li onClick={() => displaySet("home-furniture")}>
             <FontAwesomeIcon icon={faCouch} className="icon" />

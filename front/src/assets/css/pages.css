@@ -1,7 +1,7 @@
 /* Container Styles */
 .product-page-container {
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 15px;
+  margin-bottom: 15px;
   text-align: center;
   background-color: #f9f9f93e;
   font-family: "Arial", sans-serif;
@@ -12,7 +12,7 @@
   font-size: 2.5rem;
   font-weight: 700;
   color: #333;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-decoration: underline;
 }
 
@@ -20,9 +20,10 @@
 .product-page-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 15px;
   margin: 0 auto;
   max-width: 1200px;
+  padding: 0 10px;
 }
 
 /* Product Card Styles */
@@ -44,7 +45,8 @@
 .product-page-image {
   width: 100%;
   height: 200px;
-  object-fit: contain;
+  object-fit: cover;
+  background-color: #f2f2f2;
 }
 
 /* Product Info */
@@ -54,7 +56,7 @@
 }
 
 .product-page-name {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 600;
   margin: 10px 0;
   color: #222;
@@ -65,12 +67,80 @@
   color: green;
 }
 
-/* Responsive Design */
+.product-page-condition {
+  font-size: 1rem;
+  margin-top: 5px;
+  color: blue;
+}
+
+/* Responsive Design for Tablets and Smaller Devices */
 @media (max-width: 768px) {
+  .product-page-container {
+    display: block;
+    align-items: center;
+  }
+
   .product-page-title {
     font-size: 2rem;
+    margin-bottom: 15px;
   }
+
+  .product-page-list {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    max-width: 300px;
+  }
+
   .product-page-card {
     margin: 0 auto;
+    width: 100%;
+  }
+
+  .product-page-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .product-page-info {
+    padding: 10px;
+  }
+
+  .product-page-name {
+    font-size: 1rem;
+  }
+
+  .product-page-price,
+  .product-page-condition {
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsive Design for Mobile Devices */
+@media (max-width: 480px) {
+  .product-page-container {
+    padding: 10px;
+  }
+
+  .product-page-title {
+    font-size: 1.8rem;
+  }
+
+  .product-page-list {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+
+  .product-page-card {
+    border-radius: 5px;
+  }
+
+  .product-page-name {
+    font-size: 0.95rem;
+  }
+
+  .product-page-price,
+  .product-page-condition {
+    font-size: 0.85rem;
   }
 }
