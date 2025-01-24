@@ -1,11 +1,24 @@
 import ergonomic from "../images/luxury.webp";
 import bookshelf from "../images/bookshelf.webp";
 import recliner from "../images/recliner.jpg";
+import accessory from "../icons/accessory.png";
+import electronics from "../icons/electronics.png";
+import homeChair from "../icons/home-chair.png";
+import officeChair from "../icons/office-chair.png";
+import secondHand from "../icons/second-hand.png";
+
+export const icons = [
+  { icon: accessory, name: "accessory" },
+  { icon: electronics, name: "electronics" },
+  { icon: homeChair, name: "homeChair" },
+  { icon: officeChair, name: "officeChair" },
+  { icon: secondHand, name: "secondHand" },
+];
 
 export const officeFurnitureData = [
   {
     id: 1,
-    image: [ergonomic, recliner],
+    image: [ergonomic, recliner, officeChair],
     name: "Executive Office Chair",
     price: "Ksh. 29,900",
   },

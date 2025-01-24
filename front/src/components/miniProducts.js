@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCouch,
-  faTv,
-  faRecycle,
-  faBars,
-  faTimes,
-} from "@fortawesome/free-solid-svg-icons";
-import { MdElectricalServices } from "react-icons/md";
-import { PiOfficeChairLight } from "react-icons/pi";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import "../assets/css/miniproducts.css";
 import "../assets/css/pages.css";
 import "material-icons/iconfont/material-icons.css";
@@ -21,6 +13,11 @@ import {
 } from "../assets/data/data";
 import { Carousel } from "antd";
 import Modal from "./modal";
+import accessory from "../assets/icons/accessory.png";
+import electronics from "../assets/icons/electronics.png";
+import homeChair from "../assets/icons/home-chair.png";
+import officeChair from "../assets/icons/office-chair.png";
+import secondHand from "../assets/icons/second-hand.png";
 
 function MiniProducts() {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -72,25 +69,25 @@ function MiniProducts() {
             <FontAwesomeIcon icon={isExpanded ? faTimes : faBars} />
           </button>
           <li onClick={() => displaySet("office-chairs")}>
-            <PiOfficeChairLight className="icon" />
+            <img src={officeChair} alt="office-chair" className="icon" />
             {isExpanded && <p className="icon-description">Office Furniture</p>}
           </li>
           <li onClick={() => displaySet("home-furniture")}>
-            <FontAwesomeIcon icon={faCouch} className="icon" />
+            <img src={homeChair} alt="office-chair" className="icon" />
             {isExpanded && <p className="icon-description">Home Furniture</p>}
           </li>
           <li onClick={() => displaySet("electronics")}>
-            <FontAwesomeIcon icon={faTv} className="icon" />
+            <img src={electronics} alt="office-chair" className="icon" />
             {isExpanded && <p className="icon-description">Electronics</p>}
           </li>
           <li onClick={() => displaySet("second-hand-items")}>
-            <FontAwesomeIcon icon={faRecycle} className="icon" />
+            <img src={secondHand} alt="office-chair" className="icon" />
             {isExpanded && (
               <p className="icon-description">Second-Hand Items</p>
             )}
           </li>
           <li onClick={() => displaySet("accessories")}>
-            <MdElectricalServices className="icon" />
+            <img src={accessory} alt="office-chair" className="icon" />
             {isExpanded && <p className="icon-description">Accessories</p>}
           </li>
         </ul>
