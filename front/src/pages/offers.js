@@ -11,7 +11,9 @@ import Search from "../components/search";
 function Offers() {
   return (
     <>
-      <Navbar />
+      <div className="navbar-element">
+        <Navbar />
+      </div>
       <Search />
       <div className="offers-container">
         <header className="offers-header">

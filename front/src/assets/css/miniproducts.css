@@ -1,15 +1,16 @@
 /* Container for the Mini Products */
 .mini-products-container {
   position: sticky;
-  top: 130px;
+  top: 0;
   left: 0;
-  height: 100%;
+  height: calc(100% - 130px);
   z-index: 1100;
   display: flex;
   padding: 5px 0px;
   align-items: flex-start;
   margin: auto;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  overflow-y: auto;
 }
 
 /* Side Navigation */
@@ -102,3 +103,4 @@
   background-color: #000000;
   color: #f4b400;
 }
+

@@ -9,15 +9,19 @@ import MiniProducts from "../components/miniProducts";
 function Products() {
   return (
     <>
-      <Navbar />
+      <div className="navbar-element">
+        <Navbar />
+      </div>
       <div className="products-container">
         <header className="products-header">
           <h1>Our Products</h1>
           <p>Discover a collection that redefines elegance and comfort.</p>
         </header>
         <Search />
-        <MiniProducts />
-        
+        <div className="mini-navbar-element">
+          <MiniProducts />
+        </div>
+
         <section className="special-note">
           <p>
             Can't find what you're looking for? We also take custom orders to

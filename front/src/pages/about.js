@@ -8,7 +8,9 @@ import Footer from "../components/footer";
 function About() {
   return (
     <>
-      <Navbar />
+      <div className="navbar-element">
+        <Navbar />
+      </div>
       <div className="about-container">
         <header className="about-header">
           <h1>About ValueMart Furniture</h1>

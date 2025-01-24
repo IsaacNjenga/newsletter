@@ -15,7 +15,10 @@ import Search from "../components/search";
 function Home() {
   return (
     <>
-      <Navbar />
+      <div className="navbar-element">
+        <Navbar />
+      </div>
+
       <Search />
       <div className="home-container">
         <header className="hero-section">

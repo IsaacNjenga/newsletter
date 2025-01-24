@@ -77,6 +77,13 @@
   color: #888;
 }
 
+.navbar-element {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10000;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-title {
