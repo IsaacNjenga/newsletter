@@ -29,6 +29,7 @@ function Search({ onSearchChange }) {
   const handleCategoryChange = (e) => {
     setActiveCategory(e.target.value);
   };
+
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearch(value);
@@ -68,6 +69,7 @@ function Search({ onSearchChange }) {
             value={activeCategory}
             onChange={handleCategoryChange}
           >
+            <option value="">Select a category to search</option>
             <option value="officeFurniture">Office Furniture</option>
             <option value="homeFurniture">Home Furniture</option>
             <option value="electronics">Electronics</option>
@@ -84,7 +86,11 @@ function Search({ onSearchChange }) {
           </InputGroup>
         </form>
       </div>
-      {search && <h3>Results for "{search}"</h3>}
+      {search && (
+        <h3>
+          Results for "{search}" in {activeCategory}
+        </h3>
+      )}
       {search && (
         <div className="search-results">
           {filteredData.map((filteredData) => (

@@ -8,6 +8,8 @@ import Search from "../components/search";
 import MiniProducts from "../components/miniProducts";
 function Products() {
   const [searchValue, setSearchValue] = useState("");
+  //const [activeCategory, setActiveCategory] = useState("officeFurniture");
+
   return (
     <>
       <div className="navbar-element">
@@ -18,9 +20,13 @@ function Products() {
           <h1>Our Products</h1>
           <p>Discover a collection that redefines elegance and comfort.</p>
         </header>{" "}
-        <Search onSearchChange={(value) => setSearchValue(value)} />
+        <Search
+          onSearchChange={(value) => setSearchValue(value)}
+          //setActiveCategory={setActiveCategory}
+        />
         {searchValue === "" && (
           <div className="mini-navbar-element">
+            {/* <MiniProducts activeCategory={activeCategory} /> */}
             <MiniProducts />
           </div>
         )}

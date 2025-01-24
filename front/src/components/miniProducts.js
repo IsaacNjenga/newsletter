@@ -19,6 +19,7 @@ import Accessories from "./accessories";
 function MiniProducts() {
   const [isExpanded, setIsExpanded] = useState(true);
   const [display, setDisplay] = useState(<OfficeChairs />);
+
   const toggleNavbar = () => {
     setIsExpanded(!isExpanded);
   };
