@@ -50,17 +50,19 @@
 }
 
 .side-navigation li:hover {
-  color: #f4b400;
-  background-color: rgba(0, 0, 0, 0.224);
+  color: #ffbe0c;
+  background-color: rgba(0, 0, 0, 0.341);
 }
 
 .side-navigation .icon {
-  font-size: 1.8rem;
+  font-size: 2rem;
   display: flex;
   align-items: center;
   flex-direction: column;
   margin-right: 12px;
+  text-align: center;
   padding: auto;
+  font-weight: 900;
 }
 
 .side-navigation.collapsed .icon {
@@ -104,3 +106,36 @@
   color: #f4b400;
 }
 
+@media (max-width: 768px) {
+  .side-navigation {
+    width: 180px;
+    padding: 6px;
+    border-radius: 8px;
+  }
+
+  .side-navigation.collapsed {
+    width: 35px;
+    padding: 6px;
+  }
+
+  .side-navigation li {
+    margin: 12px 0;
+    padding: 2px 4px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+  }
+
+  .side-navigation .icon {
+    font-size: 1.7rem;
+    margin-right: 9px;
+  }
+
+  .side-navigation.collapsed .icon {
+    font-size: 1.15rem;
+    margin-right: 8px;
+  }
+
+  .mini-products-toggle-btn {
+    margin-bottom: 15px;
+  }
+}

@@ -15,6 +15,7 @@ import HomeFurniture from "./homeFurniture";
 import Electronics from "./electronics";
 import SecondHandItems from "./secondHandItems";
 import Accessories from "./accessories";
+import "material-icons/iconfont/material-icons.css";
 
 function MiniProducts() {
   const [isExpanded, setIsExpanded] = useState(true);
