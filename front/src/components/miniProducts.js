@@ -10,16 +10,34 @@ import {
 import { MdElectricalServices } from "react-icons/md";
 import { PiOfficeChairLight } from "react-icons/pi";
 import "../assets/css/miniproducts.css";
-import OfficeChairs from "./officeFurniture";
-import HomeFurniture from "./homeFurniture";
-import Electronics from "./electronics";
-import SecondHandItems from "./secondHandItems";
-import Accessories from "./accessories";
+import "../assets/css/pages.css";
 import "material-icons/iconfont/material-icons.css";
+import {
+  accessoriesData,
+  electronicsData,
+  homeFurnitureData,
+  officeFurnitureData,
+  secondHandItemsData,
+} from "../assets/data/data";
+import { Carousel } from "antd";
+import Modal from "./modal";
 
 function MiniProducts() {
   const [isExpanded, setIsExpanded] = useState(true);
-  const [display, setDisplay] = useState(<OfficeChairs />);
+  const [data, setData] = useState(officeFurnitureData);
+  const [title, setTitle] = useState("Office Furniture");
+  const [details, setDetails] = useState(null);
+
+  const closeDetailsModal = () => {
+    setDetails(null);
+  };
+
+  const viewDetails = (id) => {
+    const filteredItem = data.find((d) => d.id === id);
+    if (filteredItem) {
+      setDetails(filteredItem);
+    }
+  };
 
   const toggleNavbar = () => {
     setIsExpanded(!isExpanded);
@@ -27,15 +45,20 @@ function MiniProducts() {
 
   const displaySet = (setter) => {
     if (setter === "office-chairs") {
-      setDisplay(<OfficeChairs />);
+      setData(officeFurnitureData);
+      setTitle("Office Furniture");
     } else if (setter === "home-furniture") {
-      setDisplay(<HomeFurniture />);
+      setData(homeFurnitureData);
+      setTitle("Home Furniture");
     } else if (setter === "electronics") {
-      setDisplay(<Electronics />);
+      setData(electronicsData);
+      setTitle("Electronics");
     } else if (setter === "second-hand-items") {
-      setDisplay(<SecondHandItems />);
+      setData(secondHandItemsData);
+      setTitle("Second Hand Items");
     } else if (setter === "accessories") {
-      setDisplay(<Accessories />);
+      setData(accessoriesData);
+      setTitle("Accessories");
     }
   };
 
@@ -72,7 +95,42 @@ function MiniProducts() {
           </li>
         </ul>
       </nav>
-      {display}
+      {data && (
+        <div className="product-page-container">
+          <h1 className="product-page-title">{title}</h1>
+          <div className="product-page-list">
+            {data.map((d) => (
+              <div key={d.id} className="product-page-card">
+                <div className="carousel-slide">
+                  <Carousel autoplay autoplaySpeed={2000} fade>
+                    {d.image.map((imgSrc, index) => (
+                      <div key={index}>
+                        <img
+                          src={imgSrc}
+                          alt={"Slide ${index +1"}
+                          className="product-page-image"
+                        />
+                      </div>
+                    ))}
+                  </Carousel>
+                </div>
+                <div className="product-page-info">
+                  <h3 className="product-page-name">{d.name}</h3>
+                  <p className="product-page-price">{d.price}</p>
+                  <button
+                    onClick={() => {
+                      viewDetails(d.id);
+                    }}
+                  >
+                    View Details
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <Modal details={details} closeDetailsModal={closeDetailsModal} />
+        </div>
+      )}
     </div>
   );
 }
