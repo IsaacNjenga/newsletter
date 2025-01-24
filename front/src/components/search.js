@@ -70,7 +70,6 @@ function Search({ onSearchChange }) {
             value={activeCategory}
             onChange={handleCategoryChange}
           >
-            <option value="">Select a category to search</option>
             <option value="officeFurniture">Office Furniture</option>
             <option value="homeFurniture">Home Furniture</option>
             <option value="electronics">Electronics</option>
