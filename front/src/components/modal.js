@@ -18,14 +18,14 @@ function Modal({ details, closeDetailsModal }) {
         </button>
         <div className="modal-body">
           <h1 className="modal-title">{details.name}</h1>
-          <div className="carousel-slide">
-            <Carousel arrows fade>
+          <div className="carousel-slide-modal">
+            <Carousel arrows fade autoplay autoplaySpeed={2500}>
               {details.image.map((imgSrc, index) => (
                 <div key={index}>
                   <img
                     src={imgSrc}
                     alt={"Slide ${index +1"}
-                    className="product-page-image"
+                    className="modal-image"
                   />
                 </div>
               ))}

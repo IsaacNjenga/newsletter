@@ -12,6 +12,7 @@ import {
   accessoriesData,
 } from "../assets/data/data";
 import Modal from "./modal";
+import { Carousel } from "antd";
 
 function Search({ onSearchChange }) {
   const [search, setSearch] = useState("");
@@ -95,11 +96,19 @@ function Search({ onSearchChange }) {
         <div className="search-results">
           {filteredData.map((filteredData) => (
             <div key={filteredData.id} className="search-product-page-card">
-              <img
-                src={filteredData.image}
-                alt={filteredData.name}
-                className="search-product-page-image"
-              />
+              <div className="carousel-slide">
+                <Carousel autoplay autoplaySpeed={2000} fade>
+                  {filteredData.image.map((imgSrc, index) => (
+                    <div key={index}>
+                      <img
+                        src={imgSrc}
+                        alt={"Slide ${index +1"}
+                        className="product-page-image"
+                      />
+                    </div>
+                  ))}
+                </Carousel>
+              </div>
               <div className="search-product-page-info">
                 <h3 className="search-product-page-name">
                   {filteredData.name}
