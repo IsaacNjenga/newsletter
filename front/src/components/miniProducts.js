@@ -20,7 +20,7 @@ import officeChair from "../assets/icons/office-chair.png";
 import secondHand from "../assets/icons/second-hand.png";
 
 function MiniProducts() {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [data, setData] = useState(officeFurnitureData);
   const [title, setTitle] = useState("Office Furniture");
   const [details, setDetails] = useState(null);
