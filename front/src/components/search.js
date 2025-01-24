@@ -11,9 +11,11 @@ import {
   secondHandItemsData,
   accessoriesData,
 } from "../assets/data/data";
+import Modal from "./modal";
 
-function Search() {
+function Search({ onSearchChange }) {
   const [search, setSearch] = useState("");
+  const [details, setDetails] = useState(null);
   const [activeCategory, setActiveCategory] = useState("officeFurniture");
 
   const categoryDataMap = {
@@ -27,6 +29,13 @@ function Search() {
   const handleCategoryChange = (e) => {
     setActiveCategory(e.target.value);
   };
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+    if (onSearchChange) {
+      onSearchChange(value);
+    }
+  };
 
   const filteredData =
     search.trim() === ""
@@ -38,6 +47,17 @@ function Search() {
               value.toLowerCase().includes(search.toLowerCase())
           )
         );
+
+  const closeDetailsModal = () => {
+    setDetails(null);
+  };
+
+  const viewDetails = (id) => {
+    const filteredItem = filteredData.find((d) => d.id === id);
+    if (filteredItem) {
+      setDetails(filteredItem);
+    }
+  };
 
   return (
     <>
@@ -57,7 +77,7 @@ function Search() {
           <InputGroup>
             <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
             <Form.Control
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={handleSearchChange}
               placeholder="I am looking for..."
               className="search-bar"
             />
@@ -80,7 +100,14 @@ function Search() {
                 </h3>
                 <p className="search-product-page-price">
                   {filteredData.price}
-                </p>
+                </p>{" "}
+                <button
+                  onClick={() => {
+                    viewDetails(filteredData.id);
+                  }}
+                >
+                  View Details
+                </button>
               </div>
             </div>
           ))}
@@ -89,6 +116,7 @@ function Search() {
           )}
         </div>
       )}
+      <Modal details={details} closeDetailsModal={closeDetailsModal} />
     </>
   );
 }
