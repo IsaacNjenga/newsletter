@@ -96,7 +96,8 @@
   }
 
   .modal-image {
-    max-width: 190px; /* Reduce image size */
+    max-width: 420px; /* Reduce image size */
+    object-fit: contain;
   }
 
   .modal-price {
