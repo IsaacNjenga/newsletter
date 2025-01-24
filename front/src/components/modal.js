@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets/css/modal.css";
+import { Carousel } from "antd";
 
 function Modal({ details, closeDetailsModal }) {
   if (!details) return null;
@@ -17,7 +18,19 @@ function Modal({ details, closeDetailsModal }) {
         </button>
         <div className="modal-body">
           <h1 className="modal-title">{details.name}</h1>
-          <img src={details.image} alt={details.name} className="modal-image" />
+          <div className="carousel-slide">
+            <Carousel arrows fade>
+              {details.image.map((imgSrc, index) => (
+                <div key={index}>
+                  <img
+                    src={imgSrc}
+                    alt={"Slide ${index +1"}
+                    className="product-page-image"
+                  />
+                </div>
+              ))}
+            </Carousel>
+          </div>
           <p className="modal-price">{details.price}</p>
         </div>
       </div>

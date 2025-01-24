@@ -45,8 +45,8 @@
 .product-page-image {
   width: 100%;
   height: 200px;
-  object-fit: cover;
-  background-color: #f2f2f2;
+  object-fit: contain;
+  background-color: #635c5c25;
 }
 
 /* Product Info */

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../assets/css/pages.css";
 import Modal from "./modal";
 import { officeFurnitureData } from "../assets/data/data";
+import { Carousel } from "antd";
 function OfficeChairs() {
   const [details, setDetails] = useState(null);
 
@@ -23,7 +24,19 @@ function OfficeChairs() {
         <div className="product-page-list">
           {officeFurnitureData.map((d) => (
             <div key={d.id} className="product-page-card">
-              <img src={d.image} alt={d.name} className="product-page-image" />
+              <div className="carousel-slide">
+                <Carousel autoplay autoplaySpeed={2000} fade>
+                  {d.image.map((imgSrc, index) => (
+                    <div key={index}>
+                      <img
+                        src={imgSrc}
+                        alt={"Slide ${index +1"}
+                        className="product-page-image"
+                      />
+                    </div>
+                  ))}
+                </Carousel>
+              </div>
               <div className="product-page-info">
                 <h3 className="product-page-name">{d.name}</h3>
                 <p className="product-page-price">{d.price}</p>
