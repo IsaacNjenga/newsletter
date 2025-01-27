@@ -26,7 +26,7 @@ const deleteImage = async (req, res) => {
       apiSecret
     );
 
-    const result = await cloudinary.UploadStream.destroy(publicId, {
+    const result = await cloudinary.uploader.destroy(publicId, {
       timestamp,
       signature,
       apiKey,

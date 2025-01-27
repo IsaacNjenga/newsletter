@@ -3,12 +3,21 @@ import Loader from "./loader.js";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "../assets/css/productForm.css";
-import { categoryData, statusData } from "../assets/data/data.js";
+import {
+  accessoriesTags,
+  categoryData,
+  electronicsTags,
+  homeFurnitureTags,
+  officeFurnitureTags,
+  secondHandItemsTags,
+  statusData,
+} from "../assets/data/data.js";
 
 function AddProduct() {
   const [loading, setLoading] = useState(false);
+  const [imageUrls, setImageUrls] = useState([]);
+  const [imagePublicIds, setImagePublicIds] = useState([]);
   const [formData, setFormData] = useState({
-    image: "",
     name: "",
     description: "",
     hasDiscount: false,
@@ -85,12 +94,117 @@ function AddProduct() {
     }
   };
 
+  const handleImageUpload = (e) => {
+    setLoading(true);
+    const files = Array.from(e.target.files); // Get all selected files
+    const maxSize = 10 * 1024 * 1024;
+
+    // Check each file size
+    for (let file of files) {
+      if (file.size > maxSize) {
+        return Swal.fire({
+          icon: "error",
+          title: "File exceeds limit!",
+          text: "Please select a file less than 10MB",
+          confirmButtonText: "OK",
+        });
+      }
+    }
+
+    const cloud_name = "dinsdfwod";
+    const preset_key = "EasyManager";
+    let newImageUrls = [];
+    let newImagePublicIds = [];
+
+    const uploadPromises = files.map((file) => {
+      const formImageData = new FormData();
+      formImageData.append("file", file);
+      formImageData.append("upload_preset", preset_key);
+
+      return axios
+        .post(
+          `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
+          formImageData,
+          { withCredentials: false }
+        )
+        .then((res) => {
+          // For each uploaded image, update the arrays
+          newImageUrls.push(res.data.secure_url);
+          newImagePublicIds.push(res.data.public_id);
+        })
+        .catch((error) => {
+          console.log(error);
+          Swal.fire({
+            icon: "error",
+            title: "Failed to upload image",
+            text: "There was an unexpected error. Please try again",
+            confirmButtonText: "OK",
+          });
+        });
+    });
+
+    // After all uploads are done, update the state
+    Promise.all(uploadPromises)
+      .then(() => {
+        Swal.fire({ icon: "success", title: "Images added successfully" });
+        setLoading(false);
+
+        setImageUrls((prevImages) => [...prevImages, ...newImageUrls]);
+        setImagePublicIds((prevIds) => [...prevIds, ...newImagePublicIds]);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Failed to upload image",
+          text: "There was an unexpected error. Please try again",
+          confirmButtonText: "OK",
+        });
+      });
+  };
+
+  const deletePicture = (e, publicId) => {
+    e.preventDefault();
+    if (!publicId) {
+      return Swal.fire({
+        icon: "error",
+        title: "No image to delete!",
+        text: "You have not selected a valid image to delete",
+        confirmButtonText: "OK",
+      });
+    }
+    setLoading(true);
+
+    axios
+      .delete("delete-image", { data: { publicId } })
+      .then(() => {
+        setImageUrls((prevImages) =>
+          prevImages.filter((_, index) => imagePublicIds[index] !== publicId)
+        );
+        setImagePublicIds((prevIds) => prevIds.filter((id) => id !== publicId));
+        setLoading(false);
+        Swal.fire({ icon: "success", title: "Image removed!" });
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Failed to delete!",
+          text: "Refresh the page and try again",
+          confirmButtonText: "OK",
+        });
+      });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const productData = { ...formData, image: imageUrls };
     console.log(formData);
     setLoading(true);
     try {
-      const response = await axios.post("add-product", formData);
+      const response = await axios.post("add-product", productData);
       if (response.data.success) {
         Swal.fire({ icon: "success", title: "Successfully added!" });
         setFormData({
@@ -144,6 +258,14 @@ function AddProduct() {
     }
   };
 
+  const categoryTagsMap = {
+    officeFurniture: officeFurnitureTags,
+    homeFurniture: homeFurnitureTags,
+    electronics: electronicsTags,
+    secondHandItems: secondHandItemsTags,
+    accessories: accessoriesTags,
+  };
+
   return (
     <>
       {loading && <Loader />}
@@ -152,6 +274,50 @@ function AddProduct() {
         style={{ maxWidth: "500px", margin: "0 auto" }}
       >
         <div>
+          <input
+            accept="image/*"
+            type="file"
+            onChange={handleImageUpload}
+            multiple
+          />
+          {imageUrls.length > 0 ? (
+            <div>
+              {imageUrls.map((url, index) => (
+                <div key={imagePublicIds[index]}>
+                  <img
+                    src={url}
+                    alt="uploaded"
+                    style={{
+                      width: "150px",
+                      height: "auto",
+                      margin: "auto",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  />
+                  <br />
+                  <div
+                    style={{
+                      margin: "auto",
+                      width: "100px",
+                      padding: "10px",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <button
+                      onClick={(e) => deletePicture(e, imagePublicIds[index])}
+                    >
+                      Remove picture
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No images uploaded.</p>
+          )}
+
           <label>Image URL:</label>
           <input
             type="text"
@@ -160,6 +326,24 @@ function AddProduct() {
             onChange={handleChange}
             required
           />
+        </div>
+
+        <div>
+          <label>Product Category:</label>
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+          >
+            <option value="" disabled>
+              Select a category
+            </option>
+            {categoryData.map((c, index) => (
+              <option key={index} value={c.name}>
+                {c.category}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div>
@@ -180,6 +364,10 @@ function AddProduct() {
             onChange={handleChange}
             required
           ></textarea>
+        </div>
+
+        <div>
+          <label>Select relevant tags for this item</label>
         </div>
 
         <div>
@@ -273,24 +461,6 @@ function AddProduct() {
             onChange={handleChange}
             required
           />
-        </div>
-
-        <div>
-          <label>Category:</label>
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-          >
-            <option value="" disabled>
-              Select a category
-            </option>
-            {categoryData.map((c, index) => (
-              <option key={index} value={c.name}>
-                {c.category}
-              </option>
-            ))}
-          </select>
         </div>
 
         <div>
