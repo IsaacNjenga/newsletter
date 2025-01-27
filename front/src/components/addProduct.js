@@ -17,6 +17,7 @@ function AddProduct() {
   const [loading, setLoading] = useState(false);
   const [imageUrls, setImageUrls] = useState([]);
   const [imagePublicIds, setImagePublicIds] = useState([]);
+  const [activeTags, setActiveTags] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -56,6 +57,12 @@ function AddProduct() {
 
   const handleChange = (e) => {
     const { name, value, type, checked, dataset } = e.target;
+
+    if (name === "category") {
+      const selectedCategory = value.replace(/\s+/g, "").toLowerCase();
+
+      setActiveTags(categoryTagsMap[selectedCategory] || []);
+    }
 
     if (dataset.parent === "dimensions") {
       setFormData((prev) => ({
@@ -259,10 +266,10 @@ function AddProduct() {
   };
 
   const categoryTagsMap = {
-    officeFurniture: officeFurnitureTags,
-    homeFurniture: homeFurnitureTags,
+    officefurniture: officeFurnitureTags,
+    homefurniture: homeFurnitureTags,
     electronics: electronicsTags,
-    secondHandItems: secondHandItemsTags,
+    "second-handitems": secondHandItemsTags,
     accessories: accessoriesTags,
   };
 
@@ -271,7 +278,8 @@ function AddProduct() {
       {loading && <Loader />}
       <form
         onSubmit={handleSubmit}
-        style={{ maxWidth: "500px", margin: "0 auto" }}
+        style={{ maxWidth: "550px", margin: "0 auto" }}
+        className="product-form"
       >
         <div>
           <input
@@ -281,7 +289,7 @@ function AddProduct() {
             multiple
           />
           {imageUrls.length > 0 ? (
-            <div>
+            <div className="image-preview-container">
               {imageUrls.map((url, index) => (
                 <div key={imagePublicIds[index]}>
                   <img
@@ -307,6 +315,7 @@ function AddProduct() {
                   >
                     <button
                       onClick={(e) => deletePicture(e, imagePublicIds[index])}
+                      className="remove-picture-btn"
                     >
                       Remove picture
                     </button>
@@ -315,35 +324,8 @@ function AddProduct() {
               ))}
             </div>
           ) : (
-            <p>No images uploaded.</p>
+            <p className="no-image-text">No image(s) uploaded.</p>
           )}
-
-          <label>Image URL:</label>
-          <input
-            type="text"
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label>Product Category:</label>
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-          >
-            <option value="" disabled>
-              Select a category
-            </option>
-            {categoryData.map((c, index) => (
-              <option key={index} value={c.name}>
-                {c.category}
-              </option>
-            ))}
-          </select>
         </div>
 
         <div>
@@ -356,6 +338,66 @@ function AddProduct() {
             required
           />
         </div>
+
+        <div>
+          <label>Product Category:</label>
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            className="product-category-dropdown"
+          >
+            <option value="" disabled>
+              Select a category
+            </option>
+            {categoryData.map((c, index) => (
+              <option key={index} value={c.name}>
+                {c.category}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="tags-div">
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "1px" }}>
+            {activeTags.length > 0 ? (
+              <label>Select relevant tags for this item</label>
+            ) : null}
+            {activeTags.length > 0
+              ? activeTags.map((tag, index) => (
+                  <>
+                    <div
+                      key={index}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        id={`tag-${index}`}
+                        value={tag}
+                        checked={formData.tags.includes(tag)}
+                        onChange={(e) => {
+                          const { checked, value } = e.target;
+                          setFormData((prev) => ({
+                            ...prev,
+                            tags: checked
+                              ? [...prev.tags, value] // Add tag if checked
+                              : prev.tags.filter((t) => t !== value), // Remove tag if unchecked
+                          }));
+                        }}
+                      />
+                      <label htmlFor={`tag-${index}`} className="tag">
+                        {tag}
+                      </label>
+                    </div>
+                  </>
+                ))
+              : null}
+          </div>
+        </div>
+
         <div>
           <label>Description:</label>
           <textarea
@@ -367,7 +409,17 @@ function AddProduct() {
         </div>
 
         <div>
-          <label>Select relevant tags for this item</label>
+          <label>Status:</label>
+          <select name="status" value={formData.status} onChange={handleChange}>
+            <option value="" disabled>
+              Select a status
+            </option>
+            {statusData.map((s, index) => (
+              <option key={index} value={s.name}>
+                {s.status}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div>
@@ -464,12 +516,8 @@ function AddProduct() {
         </div>
 
         <div>
-          <label>Tags</label>
-        </div>
-
-        <div>
           <label>Dimensions</label>
-          <div>
+          <div className="product-dimensions-container">
             <label>Unit:</label>
             <select
               name="unit"
@@ -533,20 +581,6 @@ function AddProduct() {
           />
         </div>
 
-        <div>
-          <label>Status:</label>
-          <select name="status" value={formData.status} onChange={handleChange}>
-            <option value="" disabled>
-              Select a status
-            </option>
-            {statusData.map((s, index) => (
-              <option key={index} value={s.name}>
-                {s.status}
-              </option>
-            ))}
-          </select>
-        </div>
-
         <button type="submit">Submit</button>
       </form>
     </>
@@ -554,3 +588,17 @@ function AddProduct() {
 }
 
 export default AddProduct;
+
+// .tag {
+//     display: flex;
+//     flex-direction: row;
+//     padding: 7px 25px;
+//     background: var(--tag-lg);
+//     color: var(--text-color);
+//     font-weight: 100;
+//     margin: 5px 10px;
+//     font-size: 0.8rem;
+//     border-radius: 22px;
+//     color: #00d8ff;
+//     background: #000000;
+//   }
