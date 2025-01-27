@@ -10,7 +10,7 @@ import recliner from "../assets/images/recliner.jpg";
 import sofa from "../assets/images/sofa.jpg";
 import wooden from "../assets/images/wooden.jpg";
 import Footer from "../components/footer";
-import Search from "../components/search";
+//import AddProduct from "../components/addProduct";
 
 function Home() {
   return (
@@ -19,13 +19,13 @@ function Home() {
         <Navbar />
       </div>
 
-      <Search />
       <div className="home-container">
         <header className="hero-section">
           <h1 className="hero-title">Welcome to ValueMart Furniture</h1>
           <p className="hero-subtitle">Exclusive Deals on Elegant Furniture</p>
           <button className="cta-button">Subscribe Now</button>
         </header>
+        {/* <AddProduct /> */}
         <section className="new-arrivals">
           <h2 className="section-title">New Arrivals</h2>
           <div className="product-grid">

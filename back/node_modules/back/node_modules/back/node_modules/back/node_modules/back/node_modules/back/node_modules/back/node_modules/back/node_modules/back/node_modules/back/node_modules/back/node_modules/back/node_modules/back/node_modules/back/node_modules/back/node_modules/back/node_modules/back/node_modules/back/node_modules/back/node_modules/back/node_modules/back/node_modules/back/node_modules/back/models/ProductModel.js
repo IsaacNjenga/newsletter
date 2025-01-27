@@ -31,11 +31,10 @@ const productSchema = new mongoose.Schema(
       unit: { type: String, default: "cm" },
     },
     weight: { type: Number },
-    sku: { type: String, unique: true },
     availableColours: { type: [String] },
     status: {
       type: String,
-      enum: ["Available", "Out of Stock", "Discontinued"],
+      enum: ["Available", "Out of Stock", "Discontinued","Upcoming"],
       default: "Available",
     },
     offerStartDate: { type: Date },

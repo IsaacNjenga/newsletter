@@ -5,17 +5,26 @@ import Contact from "./pages/contacts";
 import Offers from "./pages/offers";
 import About from "./pages/about";
 import Products from "./pages/products";
+import axios from "axios";
+import { Toaster } from "react-hot-toast";
+
+axios.defaults.baseURL = "http://localhost:3001/EasyDeal";
+//axios.defaults.baseURL=""
+axios.defaults.withCredentials = true;
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/offers" element={<Offers />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/products" element={<Products />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/offers" element={<Offers />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/products" element={<Products />} />
+        </Routes>
+        <Toaster position="top-right" toastOption={{ duration: 2200 }} />
+      </BrowserRouter>
+    </>
   );
 }
 

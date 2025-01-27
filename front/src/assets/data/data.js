@@ -15,6 +15,21 @@ export const icons = [
   { icon: secondHand, name: "secondHand" },
 ];
 
+export const categoryData = [
+  { category: "Office Furniture", name: "Office Furniture" },
+  { category: "Home Furniture", name: "Home Furniture" },
+  { category: "Electronics", name: "Electronics" },
+  { category: "Second-Hand Items", name: "Second-Hand Items" },
+  { category: "Accessories", name: "Accessories" },
+];
+
+export const statusData = [
+  { status: "Available", name: "Available" },
+  { status: "Discontinued", name: "Discontinued" },
+  { status: "Out of Stock", name: "Out of Stock" },
+  { status: "Upcoming", name: "Upcoming" },
+];
+
 export const officeFurnitureData = [
   {
     id: 1,
