@@ -1,0 +1,83 @@
+.countdown-div {
+  background-color: rgba(255, 0, 0, 0);
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 20%);
+  justify-content: space-around;
+  width: 100%;
+  max-width: 300px;
+}
+
+.time-content {
+  height: 40px;
+  box-shadow: 0px 7px 2px -2px rgb(37, 37, 39);
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  font-size: 1rem;
+  margin-bottom: 1em;
+}
+
+.time {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #27293828;
+}
+
+.time::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 50%;
+  background-color: #27293836;
+}
+
+.time > span {
+  display: block;
+  color: var(--color-red);
+  font-size: 2.5em;
+  z-index: 2;
+}
+
+.rings {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.15);
+  z-index: 3;
+}
+
+.rings::before,
+.rings::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-very-dark-blue);
+  top: -2px;
+}
+
+.rings::before {
+  left: -3.5px;
+}
+
+.rings::after {
+  right: -3.5px;
+}
+
+.metric {
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-light-blue);
+  font-size: 0.5rem;
+  letter-spacing: 1px;
+}

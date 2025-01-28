@@ -2,6 +2,7 @@ import React from "react";
 import "../assets/css/modal.css";
 import { Carousel } from "antd";
 import { format } from "date-fns";
+import CountDown from "./countDown";
 
 function Modal({ details, closeDetailsModal }) {
   if (!details) return null;
@@ -34,12 +35,14 @@ function Modal({ details, closeDetailsModal }) {
           </div>
           <div className="modal-pricing">
             {details.hasDiscount ? (
-              <div>
-                <p className="modal-original-price">Ksh. {details.price}</p>
+              <div className="price-details">
+                <span>
+                  <p className="modal-original-price">Ksh. {details.price}</p>{" "}
+                  <p className="modal-discount">{details.discount}% Off</p>
+                </span>{" "}
                 <p className="modal-new-price">
                   Ksh. {((100 - details.discount) / 100) * details.price}
                 </p>
-                <p className="modal-discount">{details.discount}% Off</p>
               </div>
             ) : (
               <p className="modal-price">Ksh. {details.price}</p>
@@ -49,6 +52,10 @@ function Modal({ details, closeDetailsModal }) {
           {details.hasOffer && (
             <p className="modal-offer">{details.offerDescription}</p>
           )}
+          <CountDown
+            startTime={details.offerStartDate}
+            endTime={details.offerEndDate}
+          />{" "}
           <p className="modal-dates">
             Offer running from{" "}
             <strong>{format(new Date(details.offerStartDate), "PPPP")}</strong>{" "}
@@ -62,15 +69,19 @@ function Modal({ details, closeDetailsModal }) {
                   key={index}
                   className="color-box"
                   style={{ backgroundColor: color }}
-                >
-                  <p>{color}</p>
-                </div>
+                  title={color}
+                ></div>
               ))}
             </div>
           </div>
           <p className="modal-status">
             <strong>Status:</strong> {details.status}
           </p>
+          {details.tags.map((t, index) => (
+            <div key={index} className="modal-tags-div">
+              <p className="modal-tags">{t}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

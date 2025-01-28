@@ -10,19 +10,22 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  z-index: 1000;
+  z-index: 1100;
 }
 
 /* Modal Content */
 .modal-content {
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   width: 90%;
-  max-width: 500px;
-  padding: 20px;
+  margin-top: 95px;
+  max-width: 600px;
+  padding: 25px;
   position: relative;
+  z-index: 1100;
   animation: fadeIn 0.3s ease-in-out;
+  overflow-y: scroll;
 }
 
 /* Close Button */
@@ -57,27 +60,35 @@
 
 .carousel-slide-modal {
   margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.399);
+  border-radius: 12px;
 }
 
 .modal-image {
   width: 100%;
   height: 300px;
-  object-fit: cover;
-  border-radius: 8px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.price-details span {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
 }
 
 .modal-pricing {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .modal-original-price {
   text-decoration: line-through;
   color: #e74c3c;
-  font-size: 18px;
+  font-size: 60px;
 }
 
 .modal-new-price {
-  font-size: 22px;
+  font-size: 65px;
   font-weight: bold;
   color: #2ecc71;
 }
@@ -85,13 +96,13 @@
 .modal-discount {
   color: #f39c12;
   font-size: 16px;
-  margin-top: 5px;
+  margin: 5px;
 }
 
 .modal-price {
-  font-size: 20px;
+  font-size: 65px;
   font-weight: bold;
-  color: #2c3e50;
+  color: #2ecc71;
 }
 
 .modal-description {
@@ -106,9 +117,9 @@
 }
 
 .modal-dates {
-  font-size: 14px;
+  font-size: 12px;
   color: #777;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .modal-colors {
@@ -132,6 +143,46 @@
   font-size: 16px;
   color: #444;
   margin-top: 15px;
+}
+
+.modal-tags-div {
+  padding: 1px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.modal-tags-div .modal-tags {
+  display: grid;
+  width: 20%;
+  font-weight: 100;
+  background-color: #fbf5f57b;
+  border: 1px solid #645e5e;
+  border-radius: 23px;
+  padding: 5px 2px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.modal-tags-div .modal-tags {
+  margin-right: 5px;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 5px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #888;
+}
+
+.image-modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 5px;
 }
 
 /* Fade-In Animation */

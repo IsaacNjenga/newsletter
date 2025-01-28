@@ -123,7 +123,7 @@ function MiniProducts() {
                 </div>
                 <div className="product-page-info">
                   <h3 className="product-page-name">{d.name}</h3>
-                  <p className="product-page-price">${d.price}</p>
+                  <p className="product-page-price">Ksh.{d.price}</p>
                   <button
                     onClick={() => {
                       viewDetails(d._id);
