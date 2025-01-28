@@ -95,18 +95,30 @@
 }
 
 /* Tags styling */
-.tags-div {
-  background-color: #e2d9d9;
+.tags-div,
+.tags-div2 {
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 20px;
 }
 
-.tags-div .tag {
+.tags-div {
+  background-color: #e2d9d9;
+}
+
+.tags-div2 {
+  background-color: rgba(0, 0, 0, 0.162);
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.tags-div .tag,
+.tags-div2 .tag {
   display: flex;
   flex-direction: row;
   font-weight: 100;
-  background-color: #fbf5f57b;
+  background-color: #fbf5f528;
   border: 1px solid #645e5e;
   border-radius: 23px;
   padding: 5px 9px;

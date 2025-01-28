@@ -2,7 +2,9 @@ import React from "react";
 import "../assets/css/modal.css";
 import { Carousel } from "antd";
 import { format } from "date-fns";
-import CountDown from "./countDown";
+import CountDown from "./countDownToEnd";
+import CountDownToEnd from "./countDownToEnd";
+import CountDownToStart from "./countDownToStart";
 
 function Modal({ details, closeDetailsModal }) {
   if (!details) return null;
@@ -19,6 +21,7 @@ function Modal({ details, closeDetailsModal }) {
           &times;
         </button>
         <div className="modal-body">
+          <CountDownToStart startTime={details.offerStartDate} />
           <h1 className="modal-title">{details.name}</h1>
           <div className="carousel-slide-modal">
             <Carousel arrows fade autoplay autoplaySpeed={2500}>
@@ -52,10 +55,7 @@ function Modal({ details, closeDetailsModal }) {
           {details.hasOffer && (
             <p className="modal-offer">{details.offerDescription}</p>
           )}
-          <CountDown
-            startTime={details.offerStartDate}
-            endTime={details.offerEndDate}
-          />{" "}
+          <CountDownToEnd endTime={details.offerEndDate} />{" "}
           <p className="modal-dates">
             Offer running from{" "}
             <strong>{format(new Date(details.offerStartDate), "PPPP")}</strong>{" "}

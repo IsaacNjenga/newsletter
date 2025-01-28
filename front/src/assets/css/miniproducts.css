@@ -82,7 +82,7 @@
 
 /* Toggle Button */
 .mini-products-toggle-btn {
-  background-color: #33333392;
+  background-color: #33333300;
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -98,7 +98,7 @@
 }
 
 .mini-products-toggle-btn:hover {
-  background-color: #000000;
+  background-color: #00000000;
   color: #f4b400;
 }
 

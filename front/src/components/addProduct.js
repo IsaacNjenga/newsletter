@@ -468,8 +468,8 @@ function AddProduct() {
           />
         </div>
 
-        <div className="tags-div">
-          <label>Select available colours</label>
+        <div className="tags-div2">
+          <label>Select available colours for this item</label>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "1px" }}>
             {itemColours.map((c, index) => (
               <>
@@ -484,6 +484,7 @@ function AddProduct() {
                     type="checkbox"
                     id={`c-${index}`}
                     value={c}
+                    title={`${c}`}
                     checked={formData.availableColours.includes(c)}
                     onChange={(e) => {
                       const { checked, value } = e.target;
@@ -495,7 +496,23 @@ function AddProduct() {
                       }));
                     }}
                   />
-                  <label htmlFor={`c-${index}`} className="tag">
+                  <label
+                    htmlFor={`c-${index}`}
+                    className="tag"
+                    style={{
+                      color:
+                        `${c}` === "Black" ||
+                        `${c}` === "Maroon" ||
+                        `${c}` === "Purple" ||
+                        `${c}` === "Red" ||
+                        `${c}` === "Brown" ||
+                        `${c}` === "Blue" ||
+                        `${c}` === "Gray"
+                          ? "white"
+                          : "black",
+                      backgroundColor: `${c}`,
+                    }}
+                  >
                     {c}
                   </label>
                 </div>
