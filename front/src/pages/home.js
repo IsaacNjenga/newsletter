@@ -10,7 +10,7 @@ import recliner from "../assets/images/recliner.jpg";
 import sofa from "../assets/images/sofa.jpg";
 import wooden from "../assets/images/wooden.jpg";
 import Footer from "../components/footer";
-import FetchApi from "../assets/data/fetchApi";
+// import FetchApi from "../assets/data/fetchApi";
 // import AddProduct from "../components/addProduct";
 
 function Home() {
@@ -27,7 +27,7 @@ function Home() {
           <button className="cta-button">Subscribe Now</button>
         </header>
         {/* <AddProduct /> */}
-        <FetchApi />
+        {/* <FetchApi /> */}
         <section className="new-arrivals">
           <h2 className="section-title">New Arrivals</h2>
           <div className="product-grid">
