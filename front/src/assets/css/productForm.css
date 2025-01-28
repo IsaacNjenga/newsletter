@@ -5,6 +5,8 @@
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
+  max-width: 750px;
+  margin: 0 auto;
 }
 
 .product-form label {
@@ -22,7 +24,7 @@
 .product-form select,
 .product-form textarea,
 .product-form button {
-  width: 100%;
+  width: 95%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
@@ -32,12 +34,13 @@
 
 .product-form input[type="checkbox"] {
   width: auto;
-  margin-right: 5px;
+  margin-right: 3px;
+  margin-bottom: 5px;
 }
 
 .product-form textarea {
   resize: none;
-  min-height: 100px;
+  min-height: 75px;
 }
 
 .product-form button {
@@ -57,9 +60,9 @@
 /* Image preview container */
 .image-preview-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 20px;
+  flex-direction: row;
+  gap: 5px;
+  margin-bottom: 10px;
 }
 
 .image-preview-container img {
@@ -68,24 +71,32 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.remove-picture-btn {
+.remove-picture-div {
+  margin: auto;
+  width: 65%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.remove-picture-div button {
   background-color: #ff4d4d;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  padding: 5px 10px;
+  padding: 5px 5px;
   font-size: 12px;
   transition: background-color 0.3s;
 }
 
-.remove-picture-btn:hover {
+.remove-picture-div button:hover {
   background-color: #ff1a1a;
 }
 
 /* Tags styling */
 .tags-div {
-  background-color: #f1f1f1;
+  background-color: #e2d9d9;
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -95,9 +106,8 @@
   display: flex;
   flex-direction: row;
   font-weight: 100;
-  background: #000000;
-  background-color: #e0e0e0;
-  border: 1px solid #ccc;
+  background-color: #fbf5f57b;
+  border: 1px solid #645e5e;
   border-radius: 23px;
   padding: 5px 9px;
   margin: 1px;
@@ -110,9 +120,19 @@
 
 /* Dimensions container */
 .product-dimensions-container {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
   gap: 10px;
+}
+
+.product-dimensions-container input,
+select {
+  width: 30%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
 }
 
 .product-dimensions-container label {

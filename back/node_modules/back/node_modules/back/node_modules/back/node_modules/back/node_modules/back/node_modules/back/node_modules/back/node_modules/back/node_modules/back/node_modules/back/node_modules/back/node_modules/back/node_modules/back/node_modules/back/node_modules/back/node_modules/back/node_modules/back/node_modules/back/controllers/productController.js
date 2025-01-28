@@ -23,15 +23,18 @@ const getProducts = async (req, res) => {
 };
 
 const getProduct = async (req, res) => {
-  const id = req.params;
-  if (!id) {
-    res.status(400).json({ success: false, msg: "Invalid ID" });
+  const { category } = req.query;
+
+  if (!category) {
+    return res.status(404).json({ success: false, msg: "Invalid category" });
   }
+
   try {
-    const product = await ProductsModel.findOne({ _id: id });
-    res.status(201).json({ success: true, product });
+    const product = await ProductsModel.find({ category: category });
+
+    res.status(200).json({ success: true, product });
   } catch (error) {
-    console.error(error);
+    console.error("Database error:", error);
     res.status(500).json({ error: "There was an error!" });
   }
 };

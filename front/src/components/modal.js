@@ -1,6 +1,7 @@
 import React from "react";
 import "../assets/css/modal.css";
 import { Carousel } from "antd";
+import { format } from "date-fns";
 
 function Modal({ details, closeDetailsModal }) {
   if (!details) return null;
@@ -24,14 +25,52 @@ function Modal({ details, closeDetailsModal }) {
                 <div key={index}>
                   <img
                     src={imgSrc}
-                    alt={"Slide ${index +1"}
+                    alt={`Slide ${index + 1}`}
                     className="modal-image"
                   />
                 </div>
               ))}
             </Carousel>
           </div>
-          <p className="modal-price">{details.price}</p>
+          <div className="modal-pricing">
+            {details.hasDiscount ? (
+              <div>
+                <p className="modal-original-price">Ksh. {details.price}</p>
+                <p className="modal-new-price">
+                  Ksh. {((100 - details.discount) / 100) * details.price}
+                </p>
+                <p className="modal-discount">{details.discount}% Off</p>
+              </div>
+            ) : (
+              <p className="modal-price">Ksh. {details.price}</p>
+            )}
+          </div>
+          <p className="modal-description">{details.description}</p>
+          {details.hasOffer && (
+            <p className="modal-offer">{details.offerDescription}</p>
+          )}
+          <p className="modal-dates">
+            Offer running from{" "}
+            <strong>{format(new Date(details.offerStartDate), "PPPP")}</strong>{" "}
+            to <strong>{format(new Date(details.offerEndDate), "PPPP")}</strong>
+          </p>
+          <div className="modal-colors">
+            <p>Available Colours:</p>
+            <div className="color-palette">
+              {details.availableColours.map((color, index) => (
+                <div
+                  key={index}
+                  className="color-box"
+                  style={{ backgroundColor: color }}
+                >
+                  <p>{color}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <p className="modal-status">
+            <strong>Status:</strong> {details.status}
+          </p>
         </div>
       </div>
     </div>

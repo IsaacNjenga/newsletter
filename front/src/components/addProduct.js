@@ -224,6 +224,8 @@ function AddProduct() {
           offerStartDate: "",
           offerEndDate: "",
         });
+        setImageUrls([]);
+        setImagePublicIds([]);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -249,11 +251,7 @@ function AddProduct() {
   return (
     <>
       {loading && <Loader />}
-      <form
-        onSubmit={handleSubmit}
-        style={{ maxWidth: "850px", margin: "0 auto" }}
-        className="product-form"
-      >
+      <form onSubmit={handleSubmit} className="product-form">
         <div>
           <h3>Add an item</h3>
         </div>
@@ -273,26 +271,18 @@ function AddProduct() {
                     src={url}
                     alt="uploaded"
                     style={{
-                      width: "150px",
-                      height: "auto",
+                      width: "180px",
+                      height: "200px",
+                      objectFit: "contain",
                       margin: "auto",
                       display: "flex",
                       justifyContent: "center",
                     }}
                   />
                   <br />
-                  <div
-                    style={{
-                      margin: "auto",
-                      width: "100px",
-                      padding: "10px",
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                  >
+                  <div className="remove-picture-div">
                     <button
                       onClick={(e) => deletePicture(e, imagePublicIds[index])}
-                      className="remove-picture-btn"
                     >
                       Remove picture
                     </button>
@@ -515,65 +505,63 @@ function AddProduct() {
         </div>
 
         <div>
-          <label>Dimensions</label>
-          <div className="product-dimensions-container">
-            <label>Unit:</label>
-            <select
-              name="unit"
-              value={formData.dimensions.unit}
-              onChange={handleChange}
-              data-parent="dimensions"
-            >
-              <option value="cm">cm</option>
-              <option value="inches">inches</option>
-            </select>
-          </div>
-          <div>
-            <div>
-              <label>Length:</label>
-              <input
-                type="number"
-                name="length"
-                value={formData.dimensions.length}
-                onChange={handleChange}
-                data-parent="dimensions"
-                min="0"
-              />
-            </div>
-            <div>
-              <label>Width:</label>
-              <input
-                type="number"
-                name="width"
-                value={formData.dimensions.width}
-                onChange={handleChange}
-                data-parent="dimensions"
-                min="0"
-              />
-            </div>
-            <div>
-              <label>Height:</label>
-              <input
-                type="number"
-                name="height"
-                value={formData.dimensions.height}
-                onChange={handleChange}
-                data-parent="dimensions"
-                min="0"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <label>Weight (KG)</label>
-          <input
-            type="number"
-            name="weight"
-            value={formData.weight}
+          <label>Dimensions</label> <label>Unit:</label>
+          <select
+            name="unit"
+            value={formData.dimensions.unit}
             onChange={handleChange}
-            min="0"
-          />
+            data-parent="dimensions"
+          >
+            <option value="cm">cm</option>
+            <option value="inches">inches</option>
+          </select>{" "}
+          <div className="product-dimensions-container">
+            <div>
+              <div>
+                <label>Length:</label>
+                <input
+                  type="number"
+                  name="length"
+                  value={formData.dimensions.length}
+                  onChange={handleChange}
+                  data-parent="dimensions"
+                  min="0"
+                />
+              </div>
+              <div>
+                <label>Width:</label>
+                <input
+                  type="number"
+                  name="width"
+                  value={formData.dimensions.width}
+                  onChange={handleChange}
+                  data-parent="dimensions"
+                  min="0"
+                />
+              </div>
+              <div>
+                <label>Height:</label>
+                <input
+                  type="number"
+                  name="height"
+                  value={formData.dimensions.height}
+                  onChange={handleChange}
+                  data-parent="dimensions"
+                  min="0"
+                />
+              </div>{" "}
+              <div>
+                <label>Weight (KG)</label>
+                <input
+                  type="number"
+                  name="weight"
+                  value={formData.weight}
+                  onChange={handleChange}
+                  min="0"
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
         <button type="submit">Submit</button>
