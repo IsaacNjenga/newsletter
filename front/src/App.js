@@ -8,8 +8,8 @@ import Products from "./pages/products";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
 
-axios.defaults.baseURL = "http://localhost:3001/EasyDeal";
-//axios.defaults.baseURL=""
+//axios.defaults.baseURL = "http://localhost:3001/EasyDeal";
+axios.defaults.baseURL="https://valuemart-furniture-server.vercel.app/EasyDeal"
 axios.defaults.withCredentials = true;
 function App() {
   return (
