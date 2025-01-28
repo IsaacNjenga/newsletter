@@ -5,6 +5,11 @@
   background: linear-gradient(to right, #f8f8f8, #ddd);
 }
 
+.home-container {
+  padding: 10px;
+  padding-top: 100px;
+}
+
 .hero-title {
   font-size: 3rem;
   font-weight: bold;

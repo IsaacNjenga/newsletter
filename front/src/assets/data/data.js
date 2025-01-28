@@ -74,6 +74,24 @@ export const accessoriesTags = [
   "Bedding",
 ];
 
+export const itemColours = [
+  "Red",
+  "Blue",
+  "Green",
+  "Yellow",
+  "Orange",
+  "Purple",
+  "Pink",
+  "Black",
+  "White",
+  "Gray",
+  "Brown",
+  "Silver",
+  "Gold",
+  "Beige",
+  "Maroon"
+];
+
 export const officeFurnitureData = [
   {
     id: 1,

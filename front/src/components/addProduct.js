@@ -8,6 +8,7 @@ import {
   categoryData,
   electronicsTags,
   homeFurnitureTags,
+  itemColours,
   officeFurnitureTags,
   secondHandItemsTags,
   statusData,
@@ -26,12 +27,9 @@ function AddProduct() {
     hasOffer: false,
     offerDescription: "",
     price: "",
-    colour: "",
     category: "",
     stockQuantity: 0,
-    rating: 0,
     tags: [],
-    isFeatured: false,
     dimensions: {
       length: 0,
       width: 0,
@@ -43,16 +41,6 @@ function AddProduct() {
     status: "Available",
     offerStartDate: "",
     offerEndDate: "",
-    vendor: {
-      name: "",
-      contact: "",
-    },
-    shipping: {
-      freeShipping: false,
-      shippingCost: 0,
-      estimatedDelivery: "",
-    },
-    customFields: {},
   });
 
   const handleChange = (e) => {
@@ -60,7 +48,6 @@ function AddProduct() {
 
     if (name === "category") {
       const selectedCategory = value.replace(/\s+/g, "").toLowerCase();
-
       setActiveTags(categoryTagsMap[selectedCategory] || []);
     }
 
@@ -208,14 +195,13 @@ function AddProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const productData = { ...formData, image: imageUrls };
-    console.log(formData);
+    console.log(productData);
     setLoading(true);
     try {
       const response = await axios.post("add-product", productData);
       if (response.data.success) {
         Swal.fire({ icon: "success", title: "Successfully added!" });
         setFormData({
-          image: "",
           name: "",
           description: "",
           hasDiscount: false,
@@ -223,12 +209,9 @@ function AddProduct() {
           hasOffer: false,
           offerDescription: "",
           price: "",
-          colour: "",
           category: "",
           stockQuantity: 0,
-          rating: 0,
           tags: [],
-          isFeatured: false,
           dimensions: {
             length: 0,
             width: 0,
@@ -240,16 +223,6 @@ function AddProduct() {
           status: "Available",
           offerStartDate: "",
           offerEndDate: "",
-          vendor: {
-            name: "",
-            contact: "",
-          },
-          shipping: {
-            freeShipping: false,
-            shippingCost: 0,
-            estimatedDelivery: "",
-          },
-          customFields: {},
         });
       }
     } catch (error) {
@@ -278,10 +251,14 @@ function AddProduct() {
       {loading && <Loader />}
       <form
         onSubmit={handleSubmit}
-        style={{ maxWidth: "550px", margin: "0 auto" }}
+        style={{ maxWidth: "850px", margin: "0 auto" }}
         className="product-form"
       >
         <div>
+          <h3>Add an item</h3>
+        </div>
+        <div>
+          <label>You can add more than one image</label>
           <input
             accept="image/*"
             type="file"
@@ -335,7 +312,6 @@ function AddProduct() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            required
           />
         </div>
 
@@ -359,10 +335,10 @@ function AddProduct() {
         </div>
 
         <div className="tags-div">
+          {activeTags.length > 0 ? (
+            <label>Select relevant tags for this item</label>
+          ) : null}
           <div style={{ display: "flex", flexWrap: "wrap", gap: "1px" }}>
-            {activeTags.length > 0 ? (
-              <label>Select relevant tags for this item</label>
-            ) : null}
             {activeTags.length > 0
               ? activeTags.map((tag, index) => (
                   <>
@@ -404,7 +380,6 @@ function AddProduct() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            required
           ></textarea>
         </div>
 
@@ -430,7 +405,7 @@ function AddProduct() {
               checked={formData.hasDiscount}
               onChange={handleChange}
             />
-            Has Discount
+            Discount available on item
           </label>
         </div>
 
@@ -456,7 +431,7 @@ function AddProduct() {
               checked={formData.hasOffer}
               onChange={handleChange}
             />
-            Has Offer
+            Special Offer on item
           </label>
         </div>
 
@@ -472,7 +447,7 @@ function AddProduct() {
             </div>
 
             <div>
-              <label>Start Date:</label>
+              <label>Starting date of the offer:</label>
               <input
                 type="date"
                 name="offerStartDate"
@@ -482,7 +457,7 @@ function AddProduct() {
             </div>
 
             <div>
-              <label>End Date:</label>{" "}
+              <label>Ending Date of the offer:</label>{" "}
               <input
                 type="date"
                 name="offerEndDate"
@@ -500,19 +475,43 @@ function AddProduct() {
             name="price"
             value={formData.price}
             onChange={handleChange}
-            required
           />
         </div>
 
-        <div>
-          <label>Colour:</label>
-          <input
-            type="text"
-            name="colour"
-            value={formData.colour}
-            onChange={handleChange}
-            required
-          />
+        <div className="tags-div">
+          <label>Select available colours</label>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "1px" }}>
+            {itemColours.map((c, index) => (
+              <>
+                <div
+                  key={index}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    id={`c-${index}`}
+                    value={c}
+                    checked={formData.availableColours.includes(c)}
+                    onChange={(e) => {
+                      const { checked, value } = e.target;
+                      setFormData((prev) => ({
+                        ...prev,
+                        availableColours: checked
+                          ? [...prev.availableColours, value]
+                          : prev.availableColours.filter((ac) => ac !== value),
+                      }));
+                    }}
+                  />
+                  <label htmlFor={`c-${index}`} className="tag">
+                    {c}
+                  </label>
+                </div>
+              </>
+            ))}
+          </div>
         </div>
 
         <div>
@@ -524,7 +523,6 @@ function AddProduct() {
               value={formData.dimensions.unit}
               onChange={handleChange}
               data-parent="dimensions"
-              required
             >
               <option value="cm">cm</option>
               <option value="inches">inches</option>
@@ -540,7 +538,6 @@ function AddProduct() {
                 onChange={handleChange}
                 data-parent="dimensions"
                 min="0"
-                required
               />
             </div>
             <div>
@@ -552,7 +549,6 @@ function AddProduct() {
                 onChange={handleChange}
                 data-parent="dimensions"
                 min="0"
-                required
               />
             </div>
             <div>
@@ -564,7 +560,6 @@ function AddProduct() {
                 onChange={handleChange}
                 data-parent="dimensions"
                 min="0"
-                required
               />
             </div>
           </div>
@@ -588,17 +583,3 @@ function AddProduct() {
 }
 
 export default AddProduct;
-
-// .tag {
-//     display: flex;
-//     flex-direction: row;
-//     padding: 7px 25px;
-//     background: var(--tag-lg);
-//     color: var(--text-color);
-//     font-weight: 100;
-//     margin: 5px 10px;
-//     font-size: 0.8rem;
-//     border-radius: 22px;
-//     color: #00d8ff;
-//     background: #000000;
-//   }
