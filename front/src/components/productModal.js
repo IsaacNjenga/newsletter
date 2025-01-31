@@ -17,7 +17,6 @@ import "../assets/css/productModal.css";
 const { Title, Text } = Typography;
 const currentDate = new Date().toISOString().split("T")[0];
 
-
 function ProductModal({ details, visible, closeDetailsModal }) {
   if (!details) return null;
 
@@ -65,14 +64,22 @@ function ProductModal({ details, visible, closeDetailsModal }) {
           <div className="modal-pricing">
             {details.hasDiscount && details.discount > 0 ? (
               <div className="price-details">
-                <Text delete type="secondary">
-                  Ksh. {Number(details.price).toLocaleString()}
+                <Text color="red">
+                  <strong
+                    style={{
+                      color: "red",
+                      textDecoration: "line-through",
+                      fontSize: "1.7rem",
+                    }}
+                  >
+                    Ksh. {Number(details.price).toLocaleString()}
+                  </strong>
                 </Text>{" "}
-                <Tag color="red">{details.discount}% Off</Tag>
+                <Tag color="yellow">{details.discount}% Off</Tag>
                 <br />
                 <br />
                 <Text type="success">
-                  <strong>
+                  <strong style={{ colour: "green", fontSize: "2.5rem" }}>
                     Ksh.{" "}
                     {Number(
                       ((100 - details.discount) / 100) * details.price
@@ -81,11 +88,11 @@ function ProductModal({ details, visible, closeDetailsModal }) {
                 </Text>
               </div>
             ) : (
-              <Title level={2}>
-                <p style={{ colour: "green" }}>
+              <Text type="success">
+                <strong style={{ colour: "green", fontSize: "2.5rem" }}>
                   Ksh. {Number(details.price).toLocaleString()}
-                </p>
-              </Title>
+                </strong>
+              </Text>
             )}
           </div>
           {/* Description */}
@@ -100,10 +107,12 @@ function ProductModal({ details, visible, closeDetailsModal }) {
                 <strong>Special Offer:</strong> {details.offerDescription}
               </Text>
             )}
+          <br />
           {details.hasOffer &&
             currentDate <
               format(new Date(details.offerEndDate), "yyyy-MM-dd") && (
-              <Text>{" "}
+              <Text>
+                {" "}
                 (Offer running from{" "}
                 <strong>
                   {format(new Date(details.offerStartDate), "PPPP")}

@@ -121,7 +121,7 @@ function MiniProducts() {
                               alt={`Slide ${index + 1}`}
                               style={{
                                 objectFit: "cover",
-                                borderRadius: "8px",
+                                borderRadius: "5px",
                               }}
                             />
                           </div>
