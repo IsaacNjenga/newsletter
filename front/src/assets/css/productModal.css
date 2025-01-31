@@ -4,14 +4,6 @@
   background-color: #fff;
 }
 
-.modal-image {
-  width: 100%;
-  margin-top: 20px;
-  max-height: 340px;
-  object-fit: contain;
-  border-radius: 8px;
-}
-
 .modal-pricing {
   text-align: center;
 }

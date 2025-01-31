@@ -59,7 +59,8 @@ const updateProduct = async (req, res) => {
 };
 
 const deleteProduct = async (req, res) => {
-  const id = req.params;
+  const { id } = req.query;
+  
   if (!id) {
     res.status(400).json({ success: false, msg: "Invalid ID" });
   }

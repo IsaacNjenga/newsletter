@@ -15,6 +15,7 @@ import axios from "axios";
 import Loader from "./loader";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 function MiniProducts() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -63,6 +64,38 @@ function MiniProducts() {
   useEffect(() => {
     fetchCategoryData("Office Furniture");
   }, []);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure you want to delete this?",
+      text: "You won't be able to revert this action!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios.delete(`delete-product?id=${id}`).then((res) => {
+            setData(res.data.products);
+            Swal.fire({
+              title: "Deleted!",
+              text: "Deleted Successfully",
+              icon: "success",
+            });
+          });
+        }
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: "Error!",
+          text: "An error occured",
+          icon: "error",
+        });
+        console.log(err);
+      });
+  };
 
   return (
     <div className="mini-products-container">
@@ -153,8 +186,24 @@ function MiniProducts() {
                     >
                       View Details
                     </Button>
-                    <Button type="default" block style={{ marginTop: "8px" }}>
-                      <Link to={`/update-product/${d._id}`}>Update Item</Link>
+                    <Button
+                      type="primary"
+                      style={{ marginTop: "8px" }}
+                      title="Edit"
+                    >
+                      <Link to={`/update-product/${d._id}`}>
+                        <EditOutlined />
+                      </Link>
+                    </Button>{" "}
+                    <Button
+                      type="primary"
+                      color="red"
+                      variant="solid"
+                      style={{ marginTop: "8px" }}
+                      title="Delete"
+                      onClick={() => handleDelete(d._id)}
+                    >
+                      <DeleteOutlined />
                     </Button>
                   </Card>
                 </Col>

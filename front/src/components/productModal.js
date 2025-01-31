@@ -10,6 +10,7 @@ import {
   Divider,
   Button,
 } from "antd";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { format } from "date-fns";
 import CountDownToEnd from "./countDownToEnd";
 import CountDownToStart from "./countDownToStart";
@@ -60,8 +61,21 @@ function ProductModal({ details, visible, closeDetailsModal }) {
 
         {/* Right Side: Product Details */}
         <Col xs={24} md={14}>
-          <Button type="default" style={{ marginTop: "25px" }}>
-            <Link to={`/update-product/${details._id}`}>Update Item</Link>
+          <Button type="primary" style={{ marginTop: "25px" }} title="Edit">
+            <Link to={`/update-product/${details._id}`}>
+              <EditOutlined />
+            </Link>
+          </Button>{" "}
+          <Button
+            type="primary"
+            color="red"
+            variant="solid"
+            style={{ marginTop: "25px" }}
+            title="Delete"
+          >
+            <Link to={`/update-product/${details._id}`}>
+              <DeleteOutlined />
+            </Link>
           </Button>
           {/* Product Name */}
           <Title level={1}>{details.name}</Title>
