@@ -4,7 +4,7 @@ import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import "../assets/css/miniproducts.css";
 import "../assets/css/pages.css";
 import "material-icons/iconfont/material-icons.css";
-import { Carousel, Image } from "antd";
+import { Card, Carousel, Image, Button, Row, Col } from "antd";
 import ProductModal from "./productModal.js";
 import accessory from "../assets/icons/accessory.png";
 import electronics from "../assets/icons/electronics.png";
@@ -106,37 +106,54 @@ function MiniProducts() {
         <div className="product-page-container">
           <h1 className="product-page-title">{title}</h1>
           <div className="product-page-list">
-            {data.map((d) => (
-              <div key={d._id} className="product-page-card">
-                <div className="carousel-slide">
-                  <Carousel autoplay autoplaySpeed={2000} fade>
-                    {d.image.map((imgSrc, index) => (
-                      <div key={index}>
-                        <Image
-                          height="250px"
-                          src={imgSrc}
-                          alt={`Slide ${index + 1}`}
-                          className="product-page-image"
-                        />
-                      </div>
-                    ))}
-                  </Carousel>
-                </div>
-                <div className="product-page-info">
-                  <h3 className="product-page-name">{d.name}</h3>
-                  <p className="product-page-price">
-                    Ksh.{Number(d.price).toLocaleString()}
-                  </p>
-                  <button
-                    onClick={() => {
-                      viewDetails(d._id);
+            <Row gutter={[16, 16]} justify="center">
+              {data.map((d) => (
+                <Col key={d._id} xs={30} sm={12} md={8} lg={6} xl={6}>
+                  <Card
+                    hoverable
+                    cover={
+                      <Carousel autoplay autoplaySpeed={2500} fade>
+                        {d.image.map((imgSrc, index) => (
+                          <div key={index}>
+                            <Image
+                              height={250}
+                              src={imgSrc}
+                              alt={`Slide ${index + 1}`}
+                              style={{
+                                objectFit: "cover",
+                                borderRadius: "8px",
+                              }}
+                            />
+                          </div>
+                        ))}
+                      </Carousel>
+                    }
+                    style={{
+                      width: 300,
+                      borderRadius: "10px",
+                      overflow: "hidden",
                     }}
                   >
-                    View Details
-                  </button>
-                </div>
-              </div>
-            ))}
+                    <Card.Meta
+                      title={d.name}
+                      description={
+                        <p className="card-price">
+                          Ksh. {Number(d.price).toLocaleString()}
+                        </p>
+                      }
+                    />
+                    <Button
+                      type="primary"
+                      block
+                      style={{ marginTop: "8px" }}
+                      onClick={() => viewDetails(d._id)}
+                    >
+                      View Details
+                    </Button>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
           </div>
           <ProductModal
             details={details}
