@@ -102,6 +102,8 @@
   color: #f4b400;
 }
 
+
+
 @media (max-width: 768px) {
   .side-navigation {
     width: 180px;

@@ -4,8 +4,8 @@ import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import "../assets/css/miniproducts.css";
 import "../assets/css/pages.css";
 import "material-icons/iconfont/material-icons.css";
-import { Carousel } from "antd";
-import Modal from "./modal";
+import { Carousel, Image } from "antd";
+import ProductModal from "./productModal.js";
 import accessory from "../assets/icons/accessory.png";
 import electronics from "../assets/icons/electronics.png";
 import homeChair from "../assets/icons/home-chair.png";
@@ -26,8 +26,8 @@ function MiniProducts() {
     setLoading(true);
     setError("");
     try {
-      const url = `get-product?category=${encodeURIComponent(category)}`;      
-      const response = await axios.get(url);      
+      const url = `get-product?category=${encodeURIComponent(category)}`;
+      const response = await axios.get(url);
       setData(response.data.product);
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -112,7 +112,8 @@ function MiniProducts() {
                   <Carousel autoplay autoplaySpeed={2000} fade>
                     {d.image.map((imgSrc, index) => (
                       <div key={index}>
-                        <img
+                        <Image
+                          height="250px"
                           src={imgSrc}
                           alt={`Slide ${index + 1}`}
                           className="product-page-image"
@@ -123,7 +124,9 @@ function MiniProducts() {
                 </div>
                 <div className="product-page-info">
                   <h3 className="product-page-name">{d.name}</h3>
-                  <p className="product-page-price">Ksh.{d.price}</p>
+                  <p className="product-page-price">
+                    Ksh.{Number(d.price).toLocaleString()}
+                  </p>
                   <button
                     onClick={() => {
                       viewDetails(d._id);
@@ -135,7 +138,11 @@ function MiniProducts() {
               </div>
             ))}
           </div>
-          <Modal details={details} closeDetailsModal={closeDetailsModal} />
+          <ProductModal
+            details={details}
+            visible={details}
+            closeDetailsModal={closeDetailsModal}
+          />
         </div>
       )}
     </div>

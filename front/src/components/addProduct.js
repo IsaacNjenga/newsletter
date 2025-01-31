@@ -437,22 +437,28 @@ function AddProduct() {
             </div>
 
             <div>
-              <label>Starting date of the offer:</label>
+              <label>Starting Date of the Offer:</label>
               <input
                 type="date"
                 name="offerStartDate"
                 value={formData.offerStartDate}
                 onChange={handleChange}
+                min={new Date().toISOString().split("T")[0]} // Restricts past dates
               />
             </div>
 
             <div>
-              <label>Ending Date of the offer:</label>{" "}
+              <label>Ending Date of the Offer:</label>
               <input
                 type="date"
                 name="offerEndDate"
                 value={formData.offerEndDate}
                 onChange={handleChange}
+                min={
+                  formData.offerStartDate ||
+                  new Date().toISOString().split("T")[0]
+                }
+                // Restricts past dates and ensures end date is not before start date
               />
             </div>
           </>

@@ -11,7 +11,7 @@ import {
   secondHandItemsData,
   accessoriesData,
 } from "../assets/data/data";
-import Modal from "./modal";
+import ProductModal from "./productModal";
 import { Carousel } from "antd";
 
 function Search({ onSearchChange }) {
@@ -130,7 +130,7 @@ function Search({ onSearchChange }) {
           )}
         </div>
       )}
-      <Modal details={details} closeDetailsModal={closeDetailsModal} />
+      <ProductModal details={details} closeDetailsModal={closeDetailsModal} />
     </>
   );
 }

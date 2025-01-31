@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../assets/css/countDown.css";
+import "../assets/css/countDownToStart.css";
 
 function CountDownToStart({ startTime }) {
   const [timeToStart, setTimeToStart] = useState(calculateTimeLeftToStart);
