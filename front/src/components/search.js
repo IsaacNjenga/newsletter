@@ -9,6 +9,7 @@ import ProductModal from "./productModal.js";
 import { Card, Carousel, Image, Button, Row, Col } from "antd";
 import axios from "axios";
 import Loader from "./loader";
+import Swal from "sweetalert2";
 
 function Search({ onSearchChange }) {
   const [search, setSearch] = useState("");
@@ -28,6 +29,7 @@ function Search({ onSearchChange }) {
     } catch (err) {
       console.error("Error fetching data:", err);
       setError("Failed to load data. Please try again later.");
+      Swal.fire({ icon: "warning", text: error });
     } finally {
       setLoading(false);
     }

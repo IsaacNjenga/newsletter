@@ -14,7 +14,7 @@ import { deleteImage } from "../controllers/cloudinaryController.js";
 router.post("/add-product", addProduct);
 router.get("/get-all-products", getProducts);
 router.get("/get-product", getProduct);
-router.put("/update-product", updateProduct);
+router.put("/update-product/:id", updateProduct);
 router.delete("/delete-product", deleteProduct);
 
 //cloudinary endpoint

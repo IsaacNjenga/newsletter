@@ -194,8 +194,11 @@ function AddProduct() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const productData = { ...formData, image: imageUrls };
-    console.log(productData);
+    const productData = {
+      ...formData,
+      image: imageUrls,
+      imageId: imagePublicIds,
+    };
     setLoading(true);
     try {
       const response = await axios.post("add-product", productData);
@@ -272,7 +275,7 @@ function AddProduct() {
                     alt="uploaded"
                     style={{
                       width: "180px",
-                      height: "200px",
+                      height: "205px",
                       objectFit: "contain",
                       margin: "auto",
                       display: "flex",

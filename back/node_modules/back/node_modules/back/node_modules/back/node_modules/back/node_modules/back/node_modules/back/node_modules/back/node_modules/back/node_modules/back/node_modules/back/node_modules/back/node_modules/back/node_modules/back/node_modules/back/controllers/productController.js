@@ -40,17 +40,18 @@ const getProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-  const id = req.params;
+  const { id } = req.params;
+  //console.log(id);
   if (!id) {
     res.status(400).json({ success: false, msg: "Invalid ID" });
   }
   try {
-    const product = await ProductsModel.findByOneAndUpdate(
+    const product = await ProductsModel.findOneAndUpdate(
       { _id: id },
       { ...req.body },
       { new: true }
     );
-    res.status(201).json({ success: true, product });
+    res.status(200).json({ success: true, ...product._doc });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "There was an error!" });

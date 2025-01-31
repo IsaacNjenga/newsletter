@@ -8,11 +8,13 @@ import {
   Col,
   Image,
   Divider,
+  Button,
 } from "antd";
 import { format } from "date-fns";
 import CountDownToEnd from "./countDownToEnd";
 import CountDownToStart from "./countDownToStart";
 import "../assets/css/productModal.css";
+import { Link } from "react-router-dom";
 
 const { Title, Text } = Typography;
 const currentDate = new Date().toISOString().split("T")[0];
@@ -49,13 +51,15 @@ function ProductModal({ details, visible, closeDetailsModal }) {
               </div>
             ))}
           </Carousel>
-
           {/* Offer Countdown & Dates */}
           <CountDownToEnd endTime={details.offerEndDate} />
         </Col>
 
         {/* Right Side: Product Details */}
         <Col xs={24} md={14}>
+          <Button type="default" style={{ marginTop: "25px" }}>
+            <Link to={`/update-product/${details._id}`}>Update Item</Link>
+          </Button>
           {/* Countdown Timer */}
           <CountDownToStart startTime={details.offerStartDate} />
           {/* Product Name */}

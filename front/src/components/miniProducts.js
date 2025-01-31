@@ -13,6 +13,8 @@ import officeChair from "../assets/icons/office-chair.png";
 import secondHand from "../assets/icons/second-hand.png";
 import axios from "axios";
 import Loader from "./loader";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function MiniProducts() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -31,7 +33,8 @@ function MiniProducts() {
       setData(response.data.product);
     } catch (err) {
       console.error("Error fetching data:", err);
-      setError("Failed to load data. Please try again later.");
+      setError("Failed to load data. Please try again refreshing.");
+      Swal.fire({ icon: "warning", text: error });
     } finally {
       setLoading(false);
     }
@@ -149,6 +152,9 @@ function MiniProducts() {
                       onClick={() => viewDetails(d._id)}
                     >
                       View Details
+                    </Button>
+                    <Button type="default" block style={{ marginTop: "8px" }}>
+                      <Link to={`/update-product/${d._id}`}>Update Item</Link>
                     </Button>
                   </Card>
                 </Col>
