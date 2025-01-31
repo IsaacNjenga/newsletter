@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "../assets/css/search.css";
+import "../assets/css/pages.css";
 import ProductModal from "./productModal.js";
 import { Card, Carousel, Image, Button, Row, Col } from "antd";
 import axios from "axios";
@@ -40,6 +41,8 @@ function Search({ onSearchChange }) {
   //   accessories: accessoriesData,
   // };
 
+  //search.trim() === "" ? []:categoryDataMap[activeCategory] => was using this for JSON data
+
   useEffect(() => {
     fetchCategoryData(activeCategory);
   }, [activeCategory]);
@@ -55,8 +58,6 @@ function Search({ onSearchChange }) {
       onSearchChange(value);
     }
   };
-
-  //search.trim() === "" ? []:categoryDataMap[activeCategory] => was using this for JSON data
 
   const filteredData = data.filter((item) =>
     Object.values(item).some(
@@ -109,58 +110,60 @@ function Search({ onSearchChange }) {
         </h3>
       )}
       {search && (
-        <div className="product-page-list">
-          <Row gutter={[16, 16]} justify="center">
-            {filteredData.map((d) => (
-              <Col key={d._id} xs={30} sm={12} md={8} lg={6} xl={6}>
-                <Card
-                  hoverable
-                  cover={
-                    <Carousel autoplay autoplaySpeed={2500} fade>
-                      {d.image.map((imgSrc, index) => (
-                        <div key={index}>
-                          <Image
-                            height={250}
-                            src={imgSrc}
-                            alt={`Slide ${index + 1}`}
-                            style={{
-                              objectFit: "cover",
-                              borderRadius: "5px",
-                            }}
-                          />
-                        </div>
-                      ))}
-                    </Carousel>
-                  }
-                  style={{
-                    width: 300,
-                    borderRadius: "10px",
-                    overflow: "hidden",
-                  }}
-                >
-                  <Card.Meta
-                    title={d.name}
-                    description={
-                      <p className="card-price">
-                        Ksh. {Number(d.price).toLocaleString()}
-                      </p>
+        <div className="product-page-container">
+          <div className="product-page-list">
+            <Row gutter={[16, 16]} justify="center">
+              {filteredData.map((d) => (
+                <Col key={d._id} xs={30} sm={12} md={8} lg={6} xl={6}>
+                  <Card
+                    hoverable
+                    cover={
+                      <Carousel autoplay autoplaySpeed={2500} fade>
+                        {d.image.map((imgSrc, index) => (
+                          <div key={index}>
+                            <Image
+                              height={250}
+                              src={imgSrc}
+                              alt={`Slide ${index + 1}`}
+                              style={{
+                                objectFit: "cover",
+                                borderRadius: "5px",
+                              }}
+                            />
+                          </div>
+                        ))}
+                      </Carousel>
                     }
-                  />
-                  <Button
-                    type="primary"
-                    block
-                    style={{ marginTop: "8px" }}
-                    onClick={() => viewDetails(d._id)}
+                    style={{
+                      width: 300,
+                      borderRadius: "10px",
+                      overflow: "hidden",
+                    }}
                   >
-                    View Details
-                  </Button>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-          {filteredData.length === 0 && (
-            <p className="no-results">No results found for "{search}"</p>
-          )}
+                    <Card.Meta
+                      title={d.name}
+                      description={
+                        <p className="card-price">
+                          Ksh. {Number(d.price).toLocaleString()}
+                        </p>
+                      }
+                    />
+                    <Button
+                      type="primary"
+                      block
+                      style={{ marginTop: "8px" }}
+                      onClick={() => viewDetails(d._id)}
+                    >
+                      View Details
+                    </Button>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+            {filteredData.length === 0 && (
+              <p className="no-results">No results found for "{search}"</p>
+            )}
+          </div>
         </div>
       )}
       <ProductModal
