@@ -24,7 +24,7 @@
   border-radius: 5px;
   position: relative;
   overflow: hidden;
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin-bottom: 1em;
 }
 
@@ -88,4 +88,21 @@
   color: black;
   font-size: 0.5rem;
   letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .countdown-end {
+    max-width: 550px;
+  }
+
+  .time-end-content {
+    height: 35px;
+    font-size: 0.5rem;
+  }
+
+  .time-end-wrapper p,
+  .metric {
+    font-size: 0.44rem;
+    letter-spacing: 0;
+  }
 }

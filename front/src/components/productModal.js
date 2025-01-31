@@ -35,6 +35,9 @@ function ProductModal({ details, visible, closeDetailsModal }) {
       <Row gutter={24}>
         {/* Left Side: Image Carousel */}
         <Col xs={24} md={10}>
+          {" "}
+          {/* Countdown Timer */}
+          <CountDownToStart startTime={details.offerStartDate} />
           <Carousel autoplay autoplaySpeed={2500} effect="fade" arrows>
             {details.image.map((imgSrc, index) => (
               <div key={index}>
@@ -60,8 +63,6 @@ function ProductModal({ details, visible, closeDetailsModal }) {
           <Button type="default" style={{ marginTop: "25px" }}>
             <Link to={`/update-product/${details._id}`}>Update Item</Link>
           </Button>
-          {/* Countdown Timer */}
-          <CountDownToStart startTime={details.offerStartDate} />
           {/* Product Name */}
           <Title level={1}>{details.name}</Title>
           {/* Pricing */}
@@ -73,7 +74,7 @@ function ProductModal({ details, visible, closeDetailsModal }) {
                     style={{
                       color: "red",
                       textDecoration: "line-through",
-                      fontSize: "1.7rem",
+                      fontSize: "1.75rem",
                     }}
                   >
                     Ksh. {Number(details.price).toLocaleString()}
@@ -83,17 +84,23 @@ function ProductModal({ details, visible, closeDetailsModal }) {
                 <br />
                 <br />
                 <Text type="success">
-                  <strong style={{ colour: "green", fontSize: "2.5rem" }}>
+                  <strong style={{ colour: "green", fontSize: "2.8rem" }}>
                     Ksh.{" "}
                     {Number(
                       ((100 - details.discount) / 100) * details.price
                     ).toLocaleString()}
                   </strong>
+                  <p>
+                    Save Ksh.{" "}
+                    {Number(
+                      details.price * (details.discount / 100)
+                    ).toLocaleString()}
+                  </p>
                 </Text>
               </div>
             ) : (
               <Text type="success">
-                <strong style={{ colour: "green", fontSize: "2.5rem" }}>
+                <strong style={{ colour: "green", fontSize: "2.8rem" }}>
                   Ksh. {Number(details.price).toLocaleString()}
                 </strong>
               </Text>

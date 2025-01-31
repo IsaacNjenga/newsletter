@@ -91,3 +91,19 @@
   font-size: 0.5rem;
   letter-spacing: 1px;
 }
+@media (max-width: 768px) {
+  .countdown {
+    max-width: 550px;
+  }
+
+  .time-content {
+    height: 35px;
+    font-size: 0.5rem;
+  }
+
+  .time-wrapper,
+  .metric {
+    font-size: 0.44rem;
+    letter-spacing: 0;
+  }
+}
