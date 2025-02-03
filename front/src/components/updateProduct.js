@@ -59,11 +59,11 @@ function UpdateProduct() {
       const response = await axios.get(url);
       if (response.data.allProducts) {
         setData(true);
+        console.log(data);
         const item = response.data.allProducts.find((i) => i._id === id);
         setFormData((prevFormData) => ({ ...prevFormData, ...item }));
         setImageUrls(item.image);
         setImagePublicIds(item.imageId);
-        console.log(item);
       }
     } catch (error) {
       console.error("Error fetching data:", error);

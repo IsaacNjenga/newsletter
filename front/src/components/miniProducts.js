@@ -12,7 +12,6 @@ import {
   Row,
   Col,
   Tag,
-  Typography,
   Badge,
 } from "antd";
 import ProductModal from "./productModal.js";
@@ -27,7 +26,6 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
-const { Text } = Typography;
 
 function MiniProducts() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -47,7 +45,10 @@ function MiniProducts() {
     } catch (err) {
       console.error("Error fetching data:", err);
       setError("Failed to load data. Please try again refreshing.");
-      Swal.fire({ icon: "warning", text: error });
+      Swal.fire({
+        icon: "warning",
+        text: "Failed to load data. Please try again refreshing.",
+      });
     } finally {
       setLoading(false);
     }
@@ -89,8 +90,10 @@ function MiniProducts() {
     })
       .then((result) => {
         if (result.isConfirmed) {
+          setLoading(true);
           axios.delete(`delete-product?id=${id}`).then((res) => {
             setData(res.data.products);
+            setLoading(false);
             Swal.fire({
               title: "Deleted!",
               text: "Deleted Successfully",
@@ -100,6 +103,7 @@ function MiniProducts() {
         }
       })
       .catch((err) => {
+        setLoading(false);
         Swal.fire({
           title: "Error!",
           text: "An error occured",
@@ -156,7 +160,7 @@ function MiniProducts() {
           <div className="product-page-list">
             <Row gutter={[16, 16]} justify="center">
               {data.map((d) => (
-                <Col key={d._id} xs={30} sm={12} md={8} lg={6} xl={6}>
+                <Col key={d._id} xs={30} sm={12} md={12} lg={8} xl={6}>
                   <Card
                     hoverable
                     cover={
@@ -166,18 +170,17 @@ function MiniProducts() {
                         style={{
                           display: d.hasOffer ? "block" : "none",
                           right: "10px",
-                        }} // Ensures the badge only appears when there's an offer
+                        }} 
                       >
                         <Carousel autoplay autoplaySpeed={2500} fade>
                           {d.image.map((imgSrc, index) => (
                             <div key={index}>
                               <Image
-                                height={290}
+                                height={300}
                                 src={imgSrc}
                                 alt={`Slide ${index + 1}`}
                                 style={{
                                   objectFit: "cover",
-                                  borderRadius: "5px",
                                 }}
                               />
                             </div>
@@ -186,14 +189,14 @@ function MiniProducts() {
                       </Badge.Ribbon>
                     }
                     style={{
-                      width: 290,
+                      width: 300,
                       borderRadius: "10px",
                       overflow: "hidden",
                       backgroundColor: "whitesmoke",
                       border: "1px solid lightgrey",
                     }}
                   >
-                    <Card.Meta title={<h2>{d.name}</h2>} />
+                    <Card.Meta title={<h3>{d.name}</h3>} />
                     <Card.Meta
                       description={
                         d.hasDiscount ? (
@@ -241,11 +244,21 @@ function MiniProducts() {
                       description={d.tags.map((t, index) => (
                         <React.Fragment key={index}>
                           <Tag color="blue">{t}</Tag>
-                          {index < d.tags.length - 1 && <span>•{"  "}{" "}</span>}
+                          {index < d.tags.length - 1 && (
+                            <span
+                              style={{
+                                fontSize: "1.1rem",
+                                marginRight: "8px",
+                                color: "#1678ff",
+                              }}
+                            >
+                              •
+                            </span>
+                          )}
                         </React.Fragment>
                       ))}
                     />
-                    {/* <Button
+                    <Button
                       type="primary"
                       color="blue"
                       style={{ marginTop: "7px" }}
@@ -264,7 +277,7 @@ function MiniProducts() {
                       onClick={() => handleDelete(d._id)}
                     >
                       <DeleteOutlined />
-                    </Button> */}
+                    </Button>
                   </Card>
                 </Col>
               ))}
