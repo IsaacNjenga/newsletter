@@ -4,7 +4,17 @@ import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import "../assets/css/miniproducts.css";
 import "../assets/css/pages.css";
 import "material-icons/iconfont/material-icons.css";
-import { Card, Carousel, Image, Button, Row, Col, Tag, Typography } from "antd";
+import {
+  Card,
+  Carousel,
+  Image,
+  Button,
+  Row,
+  Col,
+  Tag,
+  Typography,
+  Badge,
+} from "antd";
 import ProductModal from "./productModal.js";
 import accessory from "../assets/icons/accessory.png";
 import electronics from "../assets/icons/electronics.png";
@@ -150,37 +160,39 @@ function MiniProducts() {
                   <Card
                     hoverable
                     cover={
-                      <Carousel autoplay autoplaySpeed={2500} fade>
-                        {d.image.map((imgSrc, index) => (
-                          <div key={index}>
-                            <Image
-                              height={250}
-                              src={imgSrc}
-                              alt={`Slide ${index + 1}`}
-                              style={{
-                                objectFit: "cover",
-                                borderRadius: "5px",
-                              }}
-                            />
-                          </div>
-                        ))}
-                      </Carousel>
+                      <Badge.Ribbon
+                        text="Special Offer"
+                        color="yellow"
+                        style={{
+                          display: d.hasOffer ? "block" : "none",
+                          right: "10px",
+                        }} // Ensures the badge only appears when there's an offer
+                      >
+                        <Carousel autoplay autoplaySpeed={2500} fade>
+                          {d.image.map((imgSrc, index) => (
+                            <div key={index}>
+                              <Image
+                                height={290}
+                                src={imgSrc}
+                                alt={`Slide ${index + 1}`}
+                                style={{
+                                  objectFit: "cover",
+                                  borderRadius: "5px",
+                                }}
+                              />
+                            </div>
+                          ))}
+                        </Carousel>
+                      </Badge.Ribbon>
                     }
                     style={{
-                      width: 300,
+                      width: 290,
                       borderRadius: "10px",
                       overflow: "hidden",
+                      backgroundColor: "whitesmoke",
+                      border: "1px solid lightgrey",
                     }}
                   >
-                    <Card.Meta
-                      description={
-                        d.hasOffer ? (
-                          <Text type="warning">
-                            <p>Special Offer!</p>
-                          </Text>
-                        ) : null
-                      }
-                    />
                     <Card.Meta title={<h2>{d.name}</h2>} />
                     <Card.Meta
                       description={
@@ -190,13 +202,13 @@ function MiniProducts() {
                               style={{
                                 color: "red",
                                 textDecoration: "line-through",
-                                fontSize: "1.2rem",
+                                fontSize: "1rem",
                               }}
                             >
                               Ksh. {Number(d.price).toLocaleString()}
                             </strong>{" "}
                             <strong
-                              style={{ colour: "green", fontSize: "1.6rem" }}
+                              style={{ colour: "green", fontSize: "1.2rem" }}
                               className="card-price"
                             >
                               Ksh.{" "}
@@ -208,7 +220,7 @@ function MiniProducts() {
                         ) : (
                           <p className="card-price">
                             <strong
-                              style={{ colour: "green", fontSize: "1.6rem" }}
+                              style={{ colour: "green", fontSize: "1.2rem" }}
                             >
                               Ksh. {Number(d.price).toLocaleString()}
                             </strong>
@@ -216,21 +228,23 @@ function MiniProducts() {
                         )
                       }
                     />
-                    <Card.Meta
-                      description={d.tags.map((t, index) => (
-                        <Tag key={index} color="grey">
-                          {t}
-                        </Tag>
-                      ))}
-                    />
                     <Button
                       type="primary"
                       block
-                      style={{ marginTop: "8px" }}
+                      style={{ marginTop: "8px", marginBottom: "14px" }}
                       onClick={() => viewDetails(d._id)}
                     >
                       View Details
-                    </Button>
+                    </Button>{" "}
+                    <br />
+                    <Card.Meta
+                      description={d.tags.map((t, index) => (
+                        <React.Fragment key={index}>
+                          <Tag color="blue">{t}</Tag>
+                          {index < d.tags.length - 1 && <span>•{"  "}{" "}</span>}
+                        </React.Fragment>
+                      ))}
+                    />
                     {/* <Button
                       type="primary"
                       color="blue"
