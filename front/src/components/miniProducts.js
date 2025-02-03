@@ -4,7 +4,7 @@ import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import "../assets/css/miniproducts.css";
 import "../assets/css/pages.css";
 import "material-icons/iconfont/material-icons.css";
-import { Card, Carousel, Image, Button, Row, Col } from "antd";
+import { Card, Carousel, Image, Button, Row, Col, Tag, Typography } from "antd";
 import ProductModal from "./productModal.js";
 import accessory from "../assets/icons/accessory.png";
 import electronics from "../assets/icons/electronics.png";
@@ -16,6 +16,8 @@ import Loader from "./loader";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+
+const { Text } = Typography;
 
 function MiniProducts() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -171,12 +173,55 @@ function MiniProducts() {
                     }}
                   >
                     <Card.Meta
-                      title={d.name}
                       description={
-                        <p className="card-price">
-                          Ksh. {Number(d.price).toLocaleString()}
-                        </p>
+                        d.hasOffer ? (
+                          <Text type="warning">
+                            <p>Special Offer!</p>
+                          </Text>
+                        ) : null
                       }
+                    />
+                    <Card.Meta title={<h2>{d.name}</h2>} />
+                    <Card.Meta
+                      description={
+                        d.hasDiscount ? (
+                          <p>
+                            <strong
+                              style={{
+                                color: "red",
+                                textDecoration: "line-through",
+                                fontSize: "1.2rem",
+                              }}
+                            >
+                              Ksh. {Number(d.price).toLocaleString()}
+                            </strong>{" "}
+                            <strong
+                              style={{ colour: "green", fontSize: "1.6rem" }}
+                              className="card-price"
+                            >
+                              Ksh.{" "}
+                              {Number(
+                                ((100 - d.discount) / 100) * d.price
+                              ).toLocaleString()}
+                            </strong>
+                          </p>
+                        ) : (
+                          <p className="card-price">
+                            <strong
+                              style={{ colour: "green", fontSize: "1.6rem" }}
+                            >
+                              Ksh. {Number(d.price).toLocaleString()}
+                            </strong>
+                          </p>
+                        )
+                      }
+                    />
+                    <Card.Meta
+                      description={d.tags.map((t, index) => (
+                        <Tag key={index} color="grey">
+                          {t}
+                        </Tag>
+                      ))}
                     />
                     <Button
                       type="primary"
@@ -186,9 +231,10 @@ function MiniProducts() {
                     >
                       View Details
                     </Button>
-                    <Button
+                    {/* <Button
                       type="primary"
-                      style={{ marginTop: "8px" }}
+                      color="blue"
+                      style={{ marginTop: "7px" }}
                       title="Edit"
                     >
                       <Link to={`/update-product/${d._id}`}>
@@ -204,7 +250,7 @@ function MiniProducts() {
                       onClick={() => handleDelete(d._id)}
                     >
                       <DeleteOutlined />
-                    </Button>
+                    </Button> */}
                   </Card>
                 </Col>
               ))}

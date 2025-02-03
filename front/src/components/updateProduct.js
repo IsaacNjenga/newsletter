@@ -14,11 +14,14 @@ import {
   statusData,
 } from "../assets/data/data.js";
 import Navbar from "./navbar.js";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { format } from "date-fns";
+import { Tag, Image } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 
 function UpdateProduct() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [imageUrls, setImageUrls] = useState([]);
   const [imagePublicIds, setImagePublicIds] = useState([]);
@@ -262,6 +265,7 @@ function UpdateProduct() {
         setImageUrls([]);
         setImagePublicIds([]);
       }
+      navigate("/products");
     } catch (error) {
       console.error("Error:", error);
       Swal.fire({
@@ -303,26 +307,23 @@ function UpdateProduct() {
             <div className="image-preview-container">
               {imageUrls.map((url, index) => (
                 <div key={imagePublicIds[index]}>
-                  <img
-                    src={url}
-                    alt="uploaded"
-                    style={{
-                      width: "180px",
-                      height: "205px",
-                      objectFit: "contain",
-                      margin: "auto",
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                  />
-                  <br />
                   <div className="remove-picture-div">
                     <button
                       onClick={(e) => deletePicture(e, imagePublicIds[index])}
                     >
-                      Remove picture
+                      <DeleteOutlined />
                     </button>
                   </div>
+                  <Image
+                    src={url}
+                    alt="uploaded"
+                    style={{
+                      width: "180px",
+                      height: "200px",
+                      objectFit: "cover",
+                    }}
+                  />
+                  <br />
                 </div>
               ))}
             </div>
@@ -397,6 +398,16 @@ function UpdateProduct() {
                   </>
                 ))
               : null}
+          </div>
+        </div>
+
+        <div style={{ marginBottom: "20px" }}>
+          <div style={{ display: "flex", gap: "8px" }}>
+            {formData.tags.map((tag, index) => (
+              <Tag key={index} color="blue">
+                {tag}
+              </Tag>
+            ))}
           </div>
         </div>
 

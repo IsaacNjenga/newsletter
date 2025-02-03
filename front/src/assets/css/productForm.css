@@ -63,20 +63,21 @@
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 15px;
   margin-bottom: 10px;
+  flex-direction: column;
 }
 
 .image-preview-container img {
   border: 2px solid #ddd;
   border-radius: 5px;
+  width: 100%;
+  max-width: 180px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .remove-picture-div {
   margin: auto;
-  width: 65%;
-  padding: 0;
-  display: flex;
-  justify-content: center;
+  width: 30%;
+  align-items: left;
 }
 
 .remove-picture-div button {
@@ -85,8 +86,8 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  padding: 5px 5px;
-  font-size: 12px;
+  padding: 6px 3px;
+  font-size: 15px;
   transition: background-color 0.3s;
 }
 

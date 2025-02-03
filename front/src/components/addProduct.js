@@ -13,6 +13,8 @@ import {
   secondHandItemsTags,
   statusData,
 } from "../assets/data/data.js";
+import { Image, Tag } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 
 function AddProduct() {
   const [loading, setLoading] = useState(false);
@@ -270,26 +272,23 @@ function AddProduct() {
             <div className="image-preview-container">
               {imageUrls.map((url, index) => (
                 <div key={imagePublicIds[index]}>
-                  <img
-                    src={url}
-                    alt="uploaded"
-                    style={{
-                      width: "180px",
-                      height: "205px",
-                      objectFit: "contain",
-                      margin: "auto",
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                  />
-                  <br />
                   <div className="remove-picture-div">
                     <button
                       onClick={(e) => deletePicture(e, imagePublicIds[index])}
                     >
-                      Remove picture
+                      <DeleteOutlined />
                     </button>
                   </div>
+                  <Image
+                    src={url}
+                    alt="uploaded"
+                    style={{
+                      width: "180px",
+                      height: "200px",
+                      objectFit: "cover",
+                    }}
+                  />
+                  <br />
                 </div>
               ))}
             </div>
@@ -367,6 +366,16 @@ function AddProduct() {
           </div>
         </div>
 
+        <div style={{ marginBottom: "20px" }}>
+          <div style={{ display: "flex", gap: "8px" }}>
+            {formData.tags.map((tag, index) => (
+              <Tag key={index} color="blue">
+                {tag}
+              </Tag>
+            ))}
+          </div>
+        </div>
+
         <div>
           <label>Description:</label>
           <textarea
@@ -410,7 +419,7 @@ function AddProduct() {
               name="discount"
               value={formData.discount}
               onChange={handleChange}
-              min="0"
+              min="1"
               max="100"
             />
           </div>

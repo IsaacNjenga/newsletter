@@ -44,11 +44,11 @@ export const homeFurnitureTags = [
 ];
 
 export const officeFurnitureTags = [
-  "Desk",
+  "Office Desk",
   "Office Chair",
   "Bookshelf",
   "Filing Cabinet",
-  "Meeting Table",
+  "Meeting Table","Executive Seat"
 ];
 
 export const electronicsTags = [
