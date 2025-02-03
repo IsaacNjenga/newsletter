@@ -9,6 +9,7 @@ import {
   Image,
   Divider,
   Button,
+  Badge,
 } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { format } from "date-fns";
@@ -63,24 +64,37 @@ function ProductModal({ details, visible, closeDetailsModal }) {
       footer={null}
       centered
       width={1200}
-      height={450}
+      height={400}
       className="custom-modal"
     >
+      {details.hasOffer &&
+        currentDate < format(new Date(details.offerEndDate), "yyyy-MM-dd") && (
+          <Badge.Ribbon
+            text={details.offerDescription}
+            color="yellow"
+            style={{
+              display: details.hasOffer ? "block" : "none",
+              right: "10px",
+            }}
+          ></Badge.Ribbon>
+        )}
       <Row gutter={24}>
         {/* Left Side: Image Carousel */}
         <Col xs={24} md={10}>
-          {" "}
-          {/* Countdown Timer */}
-          <CountDownToStart startTime={details.offerStartDate} />
+          {/* Offer Countdown & Dates */}
+          {details.offerStartDate > currentDate ? (
+            <CountDownToStart startTime={details.offerStartDate} />
+          ) : (
+            <CountDownToEnd endTime={details.offerEndDate} />
+          )}
           <Carousel autoplay autoplaySpeed={2500} effect="fade" arrows>
             {details.image.map((imgSrc, index) => (
               <div key={index}>
                 <Image
                   width="100%"
-                  height="400px"
+                  height={350}
                   style={{
                     objectFit: "contain",
-                    borderRadius: "8px",
                   }}
                   src={imgSrc}
                   alt={`Slide ${index + 1}`}
@@ -88,33 +102,17 @@ function ProductModal({ details, visible, closeDetailsModal }) {
               </div>
             ))}
           </Carousel>
-          {/* Offer Countdown & Dates */}
-          <CountDownToEnd endTime={details.offerEndDate} />
         </Col>
 
         {/* Right Side: Product Details */}
         <Col xs={24} md={14}>
-          <Button type="primary" style={{ marginTop: "25px" }} title="Edit">
-            <Link to={`/update-product/${details._id}`}>
-              <EditOutlined />
-            </Link>
-          </Button>{" "}
-          <Button
-            type="primary"
-            color="red"
-            variant="solid"
-            style={{ marginTop: "25px" }}
-            title="Delete"
-            onClick={() => handleDelete(details._id)}
-          >
-            <DeleteOutlined />
-          </Button>
           {/* Product Name */}
           <Title level={1}>{details.name}</Title>
           {/* Pricing */}
           <div className="modal-pricing">
             {details.hasDiscount && details.discount > 0 ? (
               <div className="price-details">
+                {" "}
                 <Text color="red">
                   <strong
                     style={{
@@ -127,7 +125,6 @@ function ProductModal({ details, visible, closeDetailsModal }) {
                   </strong>
                 </Text>{" "}
                 <Tag color="yellow">{details.discount}% Off</Tag>
-                <br />
                 <br />
                 <Text type="success">
                   <strong style={{ colour: "green", fontSize: "2.8rem" }}>
@@ -146,7 +143,7 @@ function ProductModal({ details, visible, closeDetailsModal }) {
               </div>
             ) : (
               <Text type="success">
-                <strong style={{ colour: "green", fontSize: "2.8rem" }}>
+                <strong style={{ colour: "green", fontSize: "3rem" }}>
                   Ksh. {Number(details.price).toLocaleString()}
                 </strong>
               </Text>
@@ -154,16 +151,6 @@ function ProductModal({ details, visible, closeDetailsModal }) {
           </div>
           {/* Description */}
           <Text>{details.description}</Text>
-          <br />
-          <br />
-          {/* Offer Section */}
-          {details.hasOffer &&
-            currentDate <
-              format(new Date(details.offerEndDate), "yyyy-MM-dd") && (
-              <Text type="warning">
-                <strong>Special Offer:</strong> {details.offerDescription}
-              </Text>
-            )}
           <br />
           {details.hasOffer &&
             currentDate <
@@ -190,10 +177,10 @@ function ProductModal({ details, visible, closeDetailsModal }) {
                 <div
                   style={{
                     backgroundColor: color,
-                    width: "24px",
-                    height: "24px",
-                    borderRadius: "50%",
-                    border: "1px solid #ddd",
+                    width: "30px",
+                    height: "28px",
+                    borderRadius: "4px",
+                    border: "1.3px solid white",
                   }}
                   title={color}
                 ></div>

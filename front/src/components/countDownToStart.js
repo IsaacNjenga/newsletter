@@ -37,46 +37,46 @@ function CountDownToStart({ startTime }) {
   return (
     <div className="countdown-div">
       <div>
-        <p>Limited offer starts in:</p>
+        <p className="time-title">Limited offer starts in:</p>
         <section className="countdown">
           <div className="time-wrapper">
+            <p className="metric">Days</p>
             <div className="time-content">
               <div className="time">
                 <span className="days">{timeToStart.days}</span>
                 <div className="rings"></div>
               </div>
             </div>
-            <p className="metric">Days</p>
           </div>
 
           <div className="time-wrapper">
+            <p className="metric">Hours</p>
             <div className="time-content">
               <div className="time">
                 <span className="hours">{timeToStart.hours}</span>
                 <div className="rings"></div>
               </div>
             </div>
-            <p className="metric">Hours</p>
           </div>
 
           <div className="time-wrapper">
+            <p className="metric">Minutes</p>
             <div className="time-content">
               <div className="time">
                 <span className="minutes">{timeToStart.minutes}</span>
                 <div className="rings"></div>
               </div>
             </div>
-            <p className="metric">Minutes</p>
           </div>
 
           <div className="time-wrapper">
+            <p className="metric">Seconds</p>
             <div className="time-content">
               <div className="time">
                 <span className="seconds">{timeToStart.seconds}</span>
                 <div className="rings"></div>
               </div>
             </div>
-            <p className="metric">Seconds</p>
           </div>
         </section>
       </div>

@@ -37,46 +37,46 @@ function CountDownToEnd({ endTime }) {
   return (
     <div className="countdown-end-div">
       <div>
-        <p>Limited offer will end in:</p>
+        <p className="time-title">Limited offer will end in:</p>
         <section className="countdown-end">
           <div className="time-end-wrapper">
+            <p className="metric">Days</p>
             <div className="time-end-content">
               <div className="time-end">
                 <span className="days">{timeLeft.days}</span>
                 <div className="rings"></div>
               </div>
             </div>
-            <p className="metric">Days</p>
           </div>
 
           <div className="time-end-wrapper">
+            <p className="metric">Hours</p>
             <div className="time-end-content">
               <div className="time-end">
                 <span className="hours">{timeLeft.hours}</span>
                 <div className="rings"></div>
               </div>
             </div>
-            <p className="metric">Hours</p>
           </div>
 
           <div className="time-end-wrapper">
+            <p className="metric">Minutes</p>
             <div className="time-end-content">
               <div className="time-end">
                 <span className="minutes">{timeLeft.minutes}</span>
                 <div className="rings"></div>
               </div>
             </div>
-            <p className="metric">Minutes</p>
           </div>
 
           <div className="time-end-wrapper">
+            <p className="metric">Seconds</p>
             <div className="time-end-content">
               <div className="time-end">
                 <span className="seconds">{timeLeft.seconds}</span>
                 <div className="rings"></div>
               </div>
             </div>
-            <p className="metric">Seconds</p>
           </div>
         </section>
       </div>
