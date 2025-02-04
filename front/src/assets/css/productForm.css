@@ -1,19 +1,25 @@
 /* General form styling */
 .product-form {
-  background-color: #f9f9f9;
-  padding: 35px;
+  background-color: #f1e8e8;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
-  max-width: 750px;
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+.product-form h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
 }
 
 .product-form label {
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
-  color: #333;
+  color: #075a87;
 }
 
 .product-form input:focus {
@@ -22,12 +28,18 @@
 
 .product-form input,
 .product-form select,
+.product-form textarea {
+  background-color: #075a8700;
+  width: 90%;
+}
+
+.product-form input,
+.product-form select,
 .product-form textarea,
 .product-form button {
-  width: 95%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
+  border: 1px solid #0a46a6;
   border-radius: 5px;
   font-size: 14px;
 }
@@ -40,11 +52,12 @@
 
 .product-form textarea {
   resize: none;
+  background-color: rgba(0, 128, 0, 0);
   min-height: 75px;
 }
 
 .product-form button {
-  background-color: #4caf50;
+  background-color: #17c71d;
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -54,7 +67,12 @@
 }
 
 .product-form button:hover {
-  background-color: #45a049;
+  background-color: #10e71a;
+}
+
+.info-div {
+  border-left: 1px solid #0a46a6;
+  padding: 15px;
 }
 
 /* Image preview container */
@@ -108,7 +126,7 @@
 }
 
 .tags-div2 {
-  background-color: rgba(0, 0, 0, 0.162);
+  background-color: rgba(0, 0, 0, 0.025);
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -132,24 +150,31 @@
 }
 
 /* Dimensions container */
-.product-dimensions-container {
+.product-dimensions-container div {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 5px;
+}
+
+.dimensions select {
+  width: 13%;
+}
+
+.product-dimensions-container input {
+  width: 30%;
 }
 
 .product-dimensions-container input,
-select {
-  width: 30%;
+.dimensions select {
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
+  border: 1px solid #0a46a6;
   border-radius: 5px;
   font-size: 14px;
 }
 
 .product-dimensions-container label {
-  margin-bottom: 0;
+  margin-bottom: 2px;
 }
 
 /* Responsive design */
@@ -165,5 +190,9 @@ select {
   .product-dimensions-container {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .info-div {
+    border: none;
   }
 }
