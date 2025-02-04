@@ -10,6 +10,7 @@ import {
   Divider,
   Button,
   Badge,
+  Alert,
 } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { format } from "date-fns";
@@ -24,6 +25,7 @@ const { Title, Text } = Typography;
 const currentDate = new Date().toISOString().split("T")[0];
 
 function ProductModal({ details, visible, closeDetailsModal }) {
+  const hostname = window.location.hostname;
   if (!details) return null;
 
   const handleDelete = (id) => {
@@ -106,6 +108,33 @@ function ProductModal({ details, visible, closeDetailsModal }) {
 
         {/* Right Side: Product Details */}
         <Col xs={24} md={14}>
+          {" "}
+          {hostname === "admin.localhost" ||
+          hostname === "admin.valuemartfurniture.vercel.app" ? (
+            <>
+              {" "}
+              <Button
+                type="primary"
+                color="blue"
+                style={{ marginTop: "7px" }}
+                title="Edit"
+              >
+                <Link to={`/update-product/${details._id}`}>
+                  <EditOutlined />
+                </Link>
+              </Button>{" "}
+              <Button
+                type="primary"
+                color="red"
+                variant="solid"
+                style={{ marginTop: "8px" }}
+                title="Delete"
+                onClick={() => handleDelete(details._id)}
+              >
+                <DeleteOutlined />
+              </Button>
+            </>
+          ) : null}
           {/* Product Name */}
           <Title level={1}>{details.name}</Title>
           {/* Pricing */}
@@ -133,12 +162,15 @@ function ProductModal({ details, visible, closeDetailsModal }) {
                       ((100 - details.discount) / 100) * details.price
                     ).toLocaleString()}
                   </strong>
-                  <p>
-                    Save Ksh.{" "}
-                    {Number(
-                      details.price * (details.discount / 100)
-                    ).toLocaleString()}
-                  </p>
+                  <Alert
+  type="success"
+  showIcon
+  message={`Save Ksh. ${(
+    Number(details.price) * (Number(details.discount) / 100)
+  ).toFixed(2).toLocaleString()}`}
+  style={{ width: "30%", color: "#4bbe11" }}
+/>
+
                 </Text>
               </div>
             ) : (

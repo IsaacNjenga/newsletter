@@ -25,12 +25,11 @@ import axios from "axios";
 import Loader from "./loader";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import {
-  DeleteOutlined,
-  EditOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 function MiniProducts() {
+  const hostname = window.location.hostname;
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [data, setData] = useState([]);
   const [title, setTitle] = useState("Office Furniture");
@@ -346,26 +345,32 @@ function MiniProducts() {
                         </React.Fragment>
                       ))}
                     />
-                    <Button
-                      type="primary"
-                      color="blue"
-                      style={{ marginTop: "7px" }}
-                      title="Edit"
-                    >
-                      <Link to={`/update-product/${d._id}`}>
-                        <EditOutlined />
-                      </Link>
-                    </Button>{" "}
-                    <Button
-                      type="primary"
-                      color="red"
-                      variant="solid"
-                      style={{ marginTop: "8px" }}
-                      title="Delete"
-                      onClick={() => handleDelete(d._id)}
-                    >
-                      <DeleteOutlined />
-                    </Button>
+                    {hostname === "admin.localhost" ||
+                    hostname === "admin.valuemartfurniture.vercel.app" ? (
+                      <>
+                        {" "}
+                        <Button
+                          type="primary"
+                          color="blue"
+                          style={{ marginTop: "7px" }}
+                          title="Edit"
+                        >
+                          <Link to={`/update-product/${d._id}`}>
+                            <EditOutlined />
+                          </Link>
+                        </Button>{" "}
+                        <Button
+                          type="primary"
+                          color="red"
+                          variant="solid"
+                          style={{ marginTop: "8px" }}
+                          title="Delete"
+                          onClick={() => handleDelete(d._id)}
+                        >
+                          <DeleteOutlined />
+                        </Button>
+                      </>
+                    ) : null}
                   </Card>
                 </Col>
               ))}
