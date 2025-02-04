@@ -10,6 +10,7 @@ import recliner from "../assets/images/recliner.jpg";
 import sofa from "../assets/images/sofa.jpg";
 import wooden from "../assets/images/wooden.jpg";
 import Footer from "../components/footer";
+import { FloatButton } from "antd";
 // import FetchApi from "../assets/data/fetchApi";
 //import AddProduct from "../components/addProduct";
 
@@ -28,6 +29,11 @@ function Home() {
         </header>
         {/* <AddProduct /> */}
         {/* <FetchApi /> */}
+        <>
+          <FloatButton.Group shape="circle" style={{ insetInlineEnd: 24 }}>
+            <FloatButton.BackTop visibilityHeight={0} title="Back to top" />
+          </FloatButton.Group>
+        </>
         <section className="new-arrivals">
           <h2 className="section-title">New Arrivals</h2>
           <div className="product-grid">

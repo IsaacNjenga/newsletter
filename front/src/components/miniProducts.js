@@ -13,6 +13,7 @@ import {
   Col,
   Tag,
   Badge,
+  FloatButton,
 } from "antd";
 import ProductModal from "./productModal.js";
 import accessory from "../assets/icons/accessory.png";
@@ -24,8 +25,10 @@ import axios from "axios";
 import Loader from "./loader";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-
+import {
+  DeleteOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 
 function MiniProducts() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -115,7 +118,92 @@ function MiniProducts() {
 
   return (
     <div className="mini-products-container">
-      <nav
+      <>
+        <FloatButton.Group
+          shape="circle"
+          style={{ insetInlineEnd: 24 + 70 }}
+        ></FloatButton.Group>
+        <FloatButton.Group shape="circle" placement="left">
+          <nav
+            className={`side-navigation ${
+              isExpanded ? "expanded" : "collapsed"
+            }`}
+          >
+            <ul>
+              <button
+                className="mini-products-toggle-btn"
+                onClick={toggleNavbar}
+                title={isExpanded ? "Close" : "Expand"}
+              >
+                <FontAwesomeIcon icon={isExpanded ? faTimes : faBars} />
+              </button>
+              <li
+                onClick={() =>
+                  displaySet("Office Furniture", "Office Furniture")
+                }
+              >
+                <img
+                  src={officeChair}
+                  alt="office-chair"
+                  className="icon"
+                  title="Office Furniture"
+                />
+                {isExpanded && (
+                  <p className="icon-description">Office Furniture</p>
+                )}
+              </li>
+              <li
+                onClick={() => displaySet("Home Furniture", "Home Furniture")}
+              >
+                <img
+                  src={homeChair}
+                  alt="home-chair"
+                  className="icon"
+                  title="Home Furniture"
+                />
+                {isExpanded && (
+                  <p className="icon-description">Home Furniture</p>
+                )}
+              </li>
+              <li onClick={() => displaySet("Electronics", "Electronics")}>
+                <img
+                  src={electronics}
+                  alt="electronics"
+                  className="icon"
+                  title="Electronics"
+                />
+                {isExpanded && <p className="icon-description">Electronics</p>}
+              </li>
+              <li
+                onClick={() =>
+                  displaySet("Second-Hand Items", "Second Hand Items")
+                }
+              >
+                <img
+                  src={secondHand}
+                  alt="second-hand"
+                  className="icon"
+                  title="Second-Hand Items"
+                />
+                {isExpanded && (
+                  <p className="icon-description">Second-Hand Items</p>
+                )}
+              </li>
+              <li onClick={() => displaySet("Accessories", "Accessories")}>
+                <img
+                  src={accessory}
+                  alt="accessory"
+                  className="icon"
+                  title="Accessories"
+                />
+                {isExpanded && <p className="icon-description">Accessories</p>}
+              </li>
+            </ul>
+          </nav>
+          <FloatButton.BackTop visibilityHeight={0} title="Back to top" />
+        </FloatButton.Group>
+      </>
+      {/* <nav
         className={`side-navigation ${isExpanded ? "expanded" : "collapsed"}`}
       >
         <ul>
@@ -149,7 +237,7 @@ function MiniProducts() {
             {isExpanded && <p className="icon-description">Accessories</p>}
           </li>
         </ul>
-      </nav>
+      </nav> */}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -170,7 +258,7 @@ function MiniProducts() {
                         style={{
                           display: d.hasOffer ? "block" : "none",
                           right: "10px",
-                        }} 
+                        }}
                       >
                         <Carousel autoplay autoplaySpeed={2500} fade>
                           {d.image.map((imgSrc, index) => (
