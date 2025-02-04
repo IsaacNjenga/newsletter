@@ -13,7 +13,7 @@ import {
   secondHandItemsTags,
   statusData,
 } from "../assets/data/data.js";
-import { Col, Image, Row, Tag } from "antd";
+import { Button, Col, Image, Row, Tag } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
 function AddProduct() {
@@ -253,6 +253,34 @@ function AddProduct() {
     accessories: accessoriesTags,
   };
 
+  const clearForm = (e) => {
+    e.preventDefault();
+    setFormData({
+      name: "",
+      description: "",
+      hasDiscount: false,
+      discount: 0,
+      hasOffer: false,
+      offerDescription: "",
+      price: "",
+      category: "",
+      stockQuantity: 0,
+      tags: [],
+      dimensions: {
+        length: 0,
+        width: 0,
+        height: 0,
+        unit: "cm",
+      },
+      weight: 0,
+      availableColours: [],
+      status: "Available",
+      offerStartDate: "",
+      offerEndDate: "",
+    });
+    setImageUrls([]);
+    setImagePublicIds([]);
+  };
   return (
     <>
       {loading && <Loader />}
@@ -319,6 +347,15 @@ function AddProduct() {
                   onChange={handleChange}
                 />
               </div>
+              <div className="price-input">
+                <label>Price of item:</label>
+                <input
+                  type="number"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                />
+              </div>
               <div>
                 <label>Product Category:</label>
                 <select
@@ -376,15 +413,18 @@ function AddProduct() {
                     : null}
                 </div>
               </div>
-              <div style={{ marginBottom: "20px" }}>
-                <div style={{ display: "flex", gap: "8px" }}>
-                  {formData.tags.map((tag, index) => (
-                    <Tag key={index} color="blue">
-                      {tag}
-                    </Tag>
-                  ))}
+              {formData.tags.length > 0 ? (
+                <div style={{ marginBottom: "20px" }}>
+                  <div style={{ display: "flex", gap: "8px" }}>
+                    {formData.tags.map((tag, index) => (
+                      <Tag key={index} color="blue">
+                        {tag}
+                      </Tag>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : null}
+
               <div>
                 <label>Description:</label>
                 <textarea
@@ -410,93 +450,94 @@ function AddProduct() {
                   ))}
                 </select>
               </div>
-              <div>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="hasDiscount"
-                    checked={formData.hasDiscount}
-                    onChange={handleChange}
-                  />
-                  Discount available on item
+              <div style={{ margin: "20px 0" }}>
+                <label
+                  style={{
+                    borderBottom: "1px solid #0a46a6",
+                    marginBottom: "20px",
+                  }}
+                >
+                  Discounts & Offers
                 </label>
-              </div>
-              {formData.hasDiscount && (
                 <div>
-                  <label>Discount Percentage:</label>
-                  <input
-                    type="number"
-                    name="discount"
-                    value={formData.discount}
-                    onChange={handleChange}
-                    min="1"
-                    max="100"
-                  />
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="hasDiscount"
+                      checked={formData.hasDiscount}
+                      onChange={handleChange}
+                    />
+                    Discount available on item
+                  </label>
                 </div>
-              )}
-              <div>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="hasOffer"
-                    checked={formData.hasOffer}
-                    onChange={handleChange}
-                  />
-                  Special Offer on item
-                </label>
-              </div>
-              {formData.hasOffer && (
-                <>
-                  <div>
-                    <label>Offer Description:</label>
-                    <textarea
-                      name="offerDescription"
-                      value={formData.offerDescription}
-                      onChange={handleChange}
-                    ></textarea>
-                  </div>
-
-                  <div>
-                    <label>Starting Date of the Offer:</label>
+                {formData.hasDiscount && (
+                  <div className="price-input">
+                    <label>Discount Percentage (%):</label>
                     <input
-                      type="date"
-                      name="offerStartDate"
-                      value={formData.offerStartDate}
+                      type="number"
+                      name="discount"
+                      value={formData.discount}
                       onChange={handleChange}
-                      min={new Date().toISOString().split("T")[0]} // Restricts past dates
+                      min="1"
+                      max="100"
                     />
                   </div>
-
-                  <div>
-                    <label>Ending Date of the Offer:</label>
+                )}
+                <div>
+                  <label>
                     <input
-                      type="date"
-                      name="offerEndDate"
-                      value={formData.offerEndDate}
+                      type="checkbox"
+                      name="hasOffer"
+                      checked={formData.hasOffer}
                       onChange={handleChange}
-                      min={
-                        formData.offerStartDate ||
-                        new Date().toISOString().split("T")[0]
-                      }
-                      // Restricts past dates and ensures end date is not before start date
                     />
-                  </div>
-                </>
-              )}
-              <div>
-                <label>Price:</label>
-                <input
-                  type="text"
-                  name="price"
-                  value={formData.price}
-                  onChange={handleChange}
-                />
+                    Special Offer on item
+                  </label>
+                </div>
+                {formData.hasOffer && (
+                  <>
+                    <div>
+                      <label>Offer Description:</label>
+                      <textarea
+                        name="offerDescription"
+                        value={formData.offerDescription}
+                        onChange={handleChange}
+                      ></textarea>
+                    </div>
+                    <div className="dates-div">
+                      <div>
+                        <label>Starting Date</label>
+                        <input
+                          type="date"
+                          name="offerStartDate"
+                          value={formData.offerStartDate}
+                          onChange={handleChange}
+                          min={new Date().toISOString().split("T")[0]} // Restricts past dates
+                        />
+                      </div>
+
+                      <div>
+                        <label>Ending Date</label>
+                        <input
+                          type="date"
+                          name="offerEndDate"
+                          value={formData.offerEndDate}
+                          onChange={handleChange}
+                          min={
+                            formData.offerStartDate ||
+                            new Date().toISOString().split("T")[0]
+                          }
+                          // Restricts past dates and ensures end date is not before start date
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
               <label
                 style={{
                   borderBottom: "1px solid #0a46a6",
                   marginBottom: "15px",
-                  
                 }}
               >
                 Colours
@@ -556,6 +597,17 @@ function AddProduct() {
                   ))}
                 </div>
               </div>
+              {formData.availableColours.length > 0 ? (
+                <div style={{ marginBottom: "20px" }}>
+                  <div style={{ display: "flex", gap: "8px" }}>
+                    {formData.availableColours.map((colour, index) => (
+                      <Tag key={index} color="blue">
+                        {colour}
+                      </Tag>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
               <div className="dimensions">
                 <label
                   style={{
@@ -626,8 +678,14 @@ function AddProduct() {
             </div>
           </Col>
         </Row>
-
-        <button type="submit">Submit</button>
+        <div className="button-container">
+          <button type="submit" className="submit-btn">
+            Submit
+          </button>
+          <button onClick={clearForm} className="clear-btn">
+            Clear
+          </button>
+        </div>
       </form>
     </>
   );

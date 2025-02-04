@@ -30,16 +30,16 @@
 .product-form select,
 .product-form textarea {
   background-color: #075a8700;
+  border: 1px solid #0a46a6;
+  margin-bottom: 15px;
   width: 90%;
+  padding: 10px;
 }
 
 .product-form input,
 .product-form select,
 .product-form textarea,
 .product-form button {
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #0a46a6;
   border-radius: 5px;
   font-size: 14px;
 }
@@ -56,18 +56,40 @@
   min-height: 75px;
 }
 
-.product-form button {
-  background-color: #17c71d;
+.button-container {
   color: white;
-  font-size: 16px;
-  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  margin: 20px 10px;
+  justify-content: center;
+  gap: 25px;
+  font-size: 18px;
+  font-weight: 400;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.product-form button:hover {
+.submit-btn,
+.clear-btn {
+  width: 10%;
+  border: none;
+}
+
+.submit-btn {
+  background-color: rgb(23, 189, 23);
+}
+
+.clear-btn {
+  background-color: red;
+}
+
+.submit-btn:hover {
   background-color: #10e71a;
+}
+
+.clear-btn:hover {
+  background: rgb(134, 4, 4);
 }
 
 .info-div {
@@ -149,6 +171,17 @@
   margin-right: 5px;
 }
 
+.dates-div {
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.price-input {
+  width: 40%;
+}
 /* Dimensions container */
 .product-dimensions-container div {
   display: grid;

@@ -16,7 +16,7 @@ import {
 import Navbar from "./navbar.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { format } from "date-fns";
-import { Tag, Image } from "antd";
+import { Tag, Image, Row, Col } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
 function UpdateProduct() {
@@ -292,349 +292,406 @@ function UpdateProduct() {
       <Navbar />
       {loading && <Loader />}
       <form onSubmit={handleSubmit} className="product-form">
-        <div>
-          <h3>Add an item</h3>
+        <div
+          style={{
+            borderBottom: "1px solid #0a46a6",
+            margin: "25px",
+          }}
+        >
+          <h3>Update {formData.name}</h3>
         </div>
-        <div>
-          <label>You can add more than one image</label>
-          <input
-            accept="image/*"
-            type="file"
-            onChange={handleImageUpload}
-            multiple
-          />
-          {imageUrls.length > 0 ? (
-            <div className="image-preview-container">
-              {imageUrls.map((url, index) => (
-                <div key={imagePublicIds[index]}>
-                  <div className="remove-picture-div">
-                    <button
-                      onClick={(e) => deletePicture(e, imagePublicIds[index])}
-                    >
-                      <DeleteOutlined />
-                    </button>
-                  </div>
-                  <Image
-                    src={url}
-                    alt="uploaded"
-                    style={{
-                      width: "180px",
-                      height: "200px",
-                      objectFit: "cover",
-                    }}
-                  />
-                  <br />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="no-image-text">No image(s) uploaded.</p>
-          )}
-        </div>
-
-        <div>
-          <label>Product Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label>Product Category:</label>
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            className="product-category-dropdown"
-          >
-            <option value="" disabled>
-              Select a category
-            </option>
-            {categoryData.map((c, index) => (
-              <option key={index} value={c.name}>
-                {c.category}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="tags-div">
-          {activeTags.length > 0 ? (
-            <label>Select relevant tags for this item</label>
-          ) : null}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "1px" }}>
-            {activeTags.length > 0
-              ? activeTags.map((tag, index) => (
-                  <>
-                    <div
-                      key={index}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      <input
-                        type="checkbox"
-                        id={`tag-${index}`}
-                        value={tag}
-                        checked={formData.tags.includes(tag)}
-                        onChange={(e) => {
-                          const { checked, value } = e.target;
-                          setFormData((prev) => ({
-                            ...prev,
-                            tags: checked
-                              ? [...prev.tags, value] // Add tag if checked
-                              : prev.tags.filter((t) => t !== value), // Remove tag if unchecked
-                          }));
+        <Row gutter={24}>
+          <Col xs={24} md={10}>
+            {" "}
+            <div>
+              <label>You can upload more than one image</label>
+              <input
+                accept="image/*"
+                type="file"
+                onChange={handleImageUpload}
+                multiple
+              />
+              {imageUrls.length > 0 ? (
+                <div className="image-preview-container">
+                  {imageUrls.map((url, index) => (
+                    <div key={imagePublicIds[index]}>
+                      <div className="remove-picture-div">
+                        <button
+                          onClick={(e) =>
+                            deletePicture(e, imagePublicIds[index])
+                          }
+                        >
+                          <DeleteOutlined />
+                        </button>
+                      </div>
+                      <Image
+                        src={url}
+                        alt="uploaded"
+                        style={{
+                          width: "180px",
+                          height: "200px",
+                          objectFit: "cover",
                         }}
                       />
-                      <label htmlFor={`tag-${index}`} className="tag">
-                        {tag}
-                      </label>
+                      <br />
                     </div>
-                  </>
-                ))
-              : null}
-          </div>
-        </div>
-
-        <div style={{ marginBottom: "20px" }}>
-          <div style={{ display: "flex", gap: "8px" }}>
-            {formData.tags.map((tag, index) => (
-              <Tag key={index} color="blue">
-                {tag}
-              </Tag>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <label>Description:</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          ></textarea>
-        </div>
-
-        <div>
-          <label>Status:</label>
-          <select name="status" value={formData.status} onChange={handleChange}>
-            <option value="" disabled>
-              Select a status
-            </option>
-            {statusData.map((s, index) => (
-              <option key={index} value={s.name}>
-                {s.status}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              name="hasDiscount"
-              checked={formData.hasDiscount}
-              onChange={handleChange}
-            />
-            Discount available on item
-          </label>
-        </div>
-
-        {formData.hasDiscount && (
-          <div>
-            <label>Discount Percentage:</label>
-            <input
-              type="number"
-              name="discount"
-              value={formData.discount}
-              onChange={handleChange}
-              min="0"
-              max="100"
-            />
-          </div>
-        )}
-
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              name="hasOffer"
-              checked={formData.hasOffer}
-              onChange={handleChange}
-            />
-            Special Offer on item
-          </label>
-        </div>
-
-        {formData.hasOffer && (
-          <>
-            <div>
-              <label>Offer Description:</label>
-              <textarea
-                name="offerDescription"
-                value={formData.offerDescription}
-                onChange={handleChange}
-              ></textarea>
+                  ))}
+                </div>
+              ) : (
+                <p className="no-image-text">No image(s) uploaded.</p>
+              )}
             </div>
-
-            <div>
-              <label>Starting Date of the Offer:</label>
-              <input
-                type="date"
-                name="offerStartDate"
-                value={format(new Date(formData.offerStartDate), "yyyy-MM-dd")}
-                onChange={handleChange}
-                min={new Date().toISOString().split("T")[0]} // Restricts past dates
-              />
-            </div>
-
-            <div>
-              <label>Ending Date of the Offer:</label>
-              <input
-                type="date"
-                name="offerEndDate"
-                value={format(new Date(formData.offerEndDate), "yyyy-MM-dd")}
-                onChange={handleChange}
-                min={
-                  formData.offerStartDate ||
-                  new Date().toISOString().split("T")[0]
-                }
-                // Restricts past dates and ensures end date is not before start date
-              />
-            </div>
-          </>
-        )}
-
-        <div>
-          <label>Price:</label>
-          <input
-            type="text"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="tags-div2">
-          <label>Select available colours for this item</label>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "1px" }}>
-            {itemColours.map((c, index) => (
-              <>
-                <div
-                  key={index}
+          </Col>{" "}
+          <Col xs={24} md={14}>
+            {" "}
+            <div className="info-div">
+              <div>
+                <label>Product Name:</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="price-input">
+                <label>Price of item:</label>
+                <input
+                  type="number"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label>Product Category:</label>
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  className="product-category-dropdown"
+                >
+                  <option value="" disabled>
+                    Select a category
+                  </option>
+                  {categoryData.map((c, index) => (
+                    <option key={index} value={c.name}>
+                      {c.category}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="tags-div">
+                {activeTags.length > 0 ? (
+                  <label>Select relevant tags for this item</label>
+                ) : null}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "1px" }}>
+                  {activeTags.length > 0
+                    ? activeTags.map((tag, index) => (
+                        <>
+                          <div
+                            key={index}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            <input
+                              type="checkbox"
+                              id={`tag-${index}`}
+                              value={tag}
+                              checked={formData.tags.includes(tag)}
+                              onChange={(e) => {
+                                const { checked, value } = e.target;
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  tags: checked
+                                    ? [...prev.tags, value] // Add tag if checked
+                                    : prev.tags.filter((t) => t !== value), // Remove tag if unchecked
+                                }));
+                              }}
+                            />
+                            <label htmlFor={`tag-${index}`} className="tag">
+                              {tag}
+                            </label>
+                          </div>
+                        </>
+                      ))
+                    : null}
+                </div>
+              </div>
+              {formData.tags.length > 0 ? (
+                <div style={{ marginBottom: "20px" }}>
+                  <div style={{ display: "flex", gap: "8px" }}>
+                    {formData.tags.map((tag, index) => (
+                      <Tag key={index} color="blue">
+                        {tag}
+                      </Tag>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+              <div>
+                <label>Description:</label>
+                <textarea
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                ></textarea>
+              </div>
+              <div>
+                <label>Status of item:</label>
+                <select
+                  name="status"
+                  value={formData.status}
+                  onChange={handleChange}
+                >
+                  <option value="" disabled>
+                    Select a status
+                  </option>
+                  {statusData.map((s, index) => (
+                    <option key={index} value={s.name}>
+                      {s.status}
+                    </option>
+                  ))}
+                </select>
+              </div>{" "}
+              <div style={{ margin: "20px 0" }}>
+                <label
                   style={{
-                    display: "flex",
-                    alignItems: "center",
+                    borderBottom: "1px solid #0a46a6",
+                    marginBottom: "20px",
                   }}
                 >
-                  <input
-                    type="checkbox"
-                    id={`c-${index}`}
-                    value={c}
-                    title={`${c}`}
-                    checked={formData.availableColours.includes(c)}
-                    onChange={(e) => {
-                      const { checked, value } = e.target;
-                      setFormData((prev) => ({
-                        ...prev,
-                        availableColours: checked
-                          ? [...prev.availableColours, value]
-                          : prev.availableColours.filter((ac) => ac !== value),
-                      }));
-                    }}
-                  />
-                  <label
-                    htmlFor={`c-${index}`}
-                    className="tag"
-                    style={{
-                      color:
-                        `${c}` === "Black" ||
-                        `${c}` === "Maroon" ||
-                        `${c}` === "Purple" ||
-                        `${c}` === "Red" ||
-                        `${c}` === "Brown" ||
-                        `${c}` === "Blue" ||
-                        `${c}` === "Gray"
-                          ? "white"
-                          : "black",
-                      backgroundColor: `${c}`,
-                    }}
-                  >
-                    {c}
+                  Discounts & Offers
+                </label>
+                <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="hasDiscount"
+                      checked={formData.hasDiscount}
+                      onChange={handleChange}
+                    />
+                    Discount available on item
                   </label>
                 </div>
-              </>
-            ))}
-          </div>
-        </div>
+                {formData.hasDiscount && (
+                  <div className="price-input">
+                    <label>Discount Percentage (%):</label>
+                    <input
+                      type="number"
+                      name="discount"
+                      value={formData.discount}
+                      onChange={handleChange}
+                      min="1"
+                      max="100"
+                    />
+                  </div>
+                )}
+                <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="hasOffer"
+                      checked={formData.hasOffer}
+                      onChange={handleChange}
+                    />
+                    Special Offer on item
+                  </label>
+                </div>
+                {formData.hasOffer && (
+                  <>
+                    <div>
+                      <label>Offer Description:</label>
+                      <textarea
+                        name="offerDescription"
+                        value={formData.offerDescription}
+                        onChange={handleChange}
+                      ></textarea>
+                    </div>
+                    <div className="dates-div">
+                      <div>
+                        <label>Starting Date</label>
+                        <input
+                          type="date"
+                          name="offerStartDate"
+                          value={formData.offerStartDate}
+                          onChange={handleChange}
+                          min={new Date().toISOString().split("T")[0]} // Restricts past dates
+                        />
+                      </div>
 
-        <div>
-          <label>Dimensions</label> <label>Unit:</label>
-          <select
-            name="unit"
-            value={formData.dimensions.unit}
-            onChange={handleChange}
-            data-parent="dimensions"
-          >
-            <option value="cm">cm</option>
-            <option value="inches">inches</option>
-          </select>{" "}
-          <div className="product-dimensions-container">
-            <div>
-              <div>
-                <label>Length:</label>
-                <input
-                  type="number"
-                  name="length"
-                  value={formData.dimensions.length}
-                  onChange={handleChange}
-                  data-parent="dimensions"
-                  min="0"
-                />
+                      <div>
+                        <label>Ending Date</label>
+                        <input
+                          type="date"
+                          name="offerEndDate"
+                          value={formData.offerEndDate}
+                          onChange={handleChange}
+                          min={
+                            formData.offerStartDate ||
+                            new Date().toISOString().split("T")[0]
+                          }
+                          // Restricts past dates and ensures end date is not before start date
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
-              <div>
-                <label>Width:</label>
-                <input
-                  type="number"
-                  name="width"
-                  value={formData.dimensions.width}
-                  onChange={handleChange}
-                  data-parent="dimensions"
-                  min="0"
-                />
+              <label
+                style={{
+                  borderBottom: "1px solid #0a46a6",
+                  marginBottom: "15px",
+                }}
+              >
+                Colours
+              </label>
+              <div className="tags-div2">
+                <label>Select available colours for this item</label>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "1px" }}>
+                  {itemColours.map((c, index) => (
+                    <>
+                      <div
+                        key={index}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          id={`c-${index}`}
+                          value={c}
+                          title={`${c}`}
+                          checked={formData.availableColours.includes(c)}
+                          onChange={(e) => {
+                            const { checked, value } = e.target;
+                            setFormData((prev) => ({
+                              ...prev,
+                              availableColours: checked
+                                ? [...prev.availableColours, value]
+                                : prev.availableColours.filter(
+                                    (ac) => ac !== value
+                                  ),
+                            }));
+                          }}
+                        />
+                        <label
+                          htmlFor={`c-${index}`}
+                          className="tag"
+                          style={{
+                            color:
+                              `${c}` === "Black" ||
+                              `${c}` === "Maroon" ||
+                              `${c}` === "Purple" ||
+                              `${c}` === "Red" ||
+                              `${c}` === "Brown" ||
+                              `${c}` === "Blue" ||
+                              `${c}` === "Gray" ||
+                              `${c}` === "Green"
+                                ? "white"
+                                : "black",
+                            backgroundColor: `${c}`,
+                          }}
+                        >
+                          {c}
+                        </label>
+                      </div>
+                    </>
+                  ))}
+                </div>
               </div>
-              <div>
-                <label>Height:</label>
-                <input
-                  type="number"
-                  name="height"
-                  value={formData.dimensions.height}
+              {formData.availableColours.length > 0 ? (
+                <div style={{ marginBottom: "20px" }}>
+                  <div style={{ display: "flex", gap: "8px" }}>
+                    {formData.availableColours.map((colour, index) => (
+                      <Tag key={index} color="blue">
+                        {colour}
+                      </Tag>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+              <div className="dimensions">
+                <label
+                  style={{
+                    borderBottom: "1px solid #0a46a6",
+                    marginBottom: "15px",
+                  }}
+                >
+                  Dimensions
+                </label>{" "}
+                <label>Unit:</label>
+                <select
+                  name="unit"
+                  value={formData.dimensions.unit}
                   onChange={handleChange}
                   data-parent="dimensions"
-                  min="0"
-                />
-              </div>{" "}
-              <div>
-                <label>Weight (KG)</label>
-                <input
-                  type="number"
-                  name="weight"
-                  value={formData.weight}
-                  onChange={handleChange}
-                  min="0"
-                />
+                >
+                  <option value="cm">cm</option>
+                  <option value="inches">inches</option>
+                </select>{" "}
+                <div className="product-dimensions-container">
+                  <div>
+                    <div>
+                      <label>Length:</label>
+                      <input
+                        type="number"
+                        name="length"
+                        value={formData.dimensions.length}
+                        onChange={handleChange}
+                        data-parent="dimensions"
+                        min="0"
+                      />
+                    </div>
+                    <div>
+                      <label>Width:</label>
+                      <input
+                        type="number"
+                        name="width"
+                        value={formData.dimensions.width}
+                        onChange={handleChange}
+                        data-parent="dimensions"
+                        min="0"
+                      />
+                    </div>
+                    <div>
+                      <label>Height:</label>
+                      <input
+                        type="number"
+                        name="height"
+                        value={formData.dimensions.height}
+                        onChange={handleChange}
+                        data-parent="dimensions"
+                        min="0"
+                      />
+                    </div>{" "}
+                    <div>
+                      <label>Weight (KG)</label>
+                      <input
+                        type="number"
+                        name="weight"
+                        value={formData.weight}
+                        onChange={handleChange}
+                        min="0"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          </Col>
+        </Row>
+        <div className="button-container">
+          <button type="submit" className="submit-btn">
+            Update
+          </button>
+          {/* <button onClick={clearForm} className="clear-btn">
+            Clear
+          </button> */}
         </div>
-
-        <button type="submit">Submit</button>
       </form>
     </>
   );
