@@ -287,6 +287,10 @@ function UpdateProduct() {
     accessories: accessoriesTags,
   };
 
+  const cancelUpdate = () => {
+    navigate("/products");
+  };
+
   return (
     <>
       <Navbar />
@@ -516,7 +520,14 @@ function UpdateProduct() {
                         <input
                           type="date"
                           name="offerStartDate"
-                          value={formData.offerStartDate}
+                          value={
+                            formData.offerStartDate
+                              ? format(
+                                  new Date(formData.offerStartDate),
+                                  "yyyy-MM-dd"
+                                )
+                              : ""
+                          }
                           onChange={handleChange}
                           min={new Date().toISOString().split("T")[0]} // Restricts past dates
                         />
@@ -527,7 +538,14 @@ function UpdateProduct() {
                         <input
                           type="date"
                           name="offerEndDate"
-                          value={formData.offerEndDate}
+                          value={
+                            formData.offerEndDate
+                              ? format(
+                                  new Date(formData.offerEndDate),
+                                  "yyyy-MM-dd"
+                                )
+                              : ""
+                          }
                           onChange={handleChange}
                           min={
                             formData.offerStartDate ||
@@ -688,9 +706,9 @@ function UpdateProduct() {
           <button type="submit" className="submit-btn">
             Update
           </button>
-          {/* <button onClick={clearForm} className="clear-btn">
-            Clear
-          </button> */}
+          <button onClick={cancelUpdate} className="clear-btn">
+            Cancel
+          </button>
         </div>
       </form>
     </>

@@ -22,6 +22,7 @@ import ProductModal from "../components/productModal";
 import axios from "axios";
 import Loader from "../components/loader.js";
 import Swal from "sweetalert2";
+import noPic from "../assets/images/nopic.png"
 
 function Offers() {
   const hostname = window.location.hostname;
@@ -141,19 +142,31 @@ function Offers() {
                         }}
                       >
                         <Carousel autoplay autoplaySpeed={2500} fade>
-                          {d.image.map((imgSrc, index) => (
-                            <div key={index}>
-                              <Image
-                                height={300}
-                                width={`100%`}
-                                src={imgSrc}
-                                alt={`Slide ${index + 1}`}
-                                style={{
-                                  objectFit: "cover",
-                                }}
-                              />
-                            </div>
-                          ))}
+                          {Array.isArray(d.image) && d.image.length > 0 ? (
+                            d.image.map((imgSrc, index) => (
+                              <div key={index}>
+                                <Image
+                                  height={200}
+                                  width="100%"
+                                  src={imgSrc}
+                                  alt={`Slide ${index + 1}`}
+                                  style={{
+                                    objectFit: "cover",
+                                  }}
+                                />
+                              </div>
+                            ))
+                          ) : (
+                            <Image
+                              height={206}
+                              width="100%"
+                              src={noPic}
+                              alt="No Image Available"
+                              style={{
+                                objectFit: "contain",
+                              }}
+                            />
+                          )}
                         </Carousel>
                       </Badge.Ribbon>
                     }
@@ -216,7 +229,6 @@ function Offers() {
                           {index < d.tags.length - 1 && (
                             <span
                               style={{
-                                fontSize: "1.1rem",
                                 marginRight: "8px",
                                 color: "#1678ff",
                               }}

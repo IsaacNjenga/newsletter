@@ -21,7 +21,7 @@ import Loader from "../components/loader.js";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import ProductModal from "../components/productModal";
-import Offers from "./offers";
+import noPic from "../assets/images/nopic.png"
 
 function Home() {
   const hostname = window.location.hostname;
@@ -152,11 +152,12 @@ function Home() {
                           }}
                         >
                           <Carousel autoplay autoplaySpeed={2500} fade>
-                            {d.image.map((imgSrc, index) => (
+                          {Array.isArray(d.image) && d.image.length > 0 ? (
+                            d.image.map((imgSrc, index) => (
                               <div key={index}>
                                 <Image
-                                  height={300}
-                                  width={`100%`}
+                                  height={200}
+                                  width="100%"
                                   src={imgSrc}
                                   alt={`Slide ${index + 1}`}
                                   style={{
@@ -164,7 +165,18 @@ function Home() {
                                   }}
                                 />
                               </div>
-                            ))}
+                            ))
+                          ) : (
+                            <Image
+                              height={206}
+                              width="100%"
+                              src={noPic}
+                              alt="No Image Available"
+                              style={{
+                                objectFit: "contain",
+                              }}
+                            />
+                          )}
                           </Carousel>
                         </Badge.Ribbon>
                       }
@@ -227,7 +239,6 @@ function Home() {
                             {index < d.tags.length - 1 && (
                               <span
                                 style={{
-                                  fontSize: "1.1rem",
                                   marginRight: "8px",
                                   color: "#1678ff",
                                 }}
@@ -291,11 +302,12 @@ function Home() {
                           }}
                         >
                           <Carousel autoplay autoplaySpeed={2500} fade>
-                            {d.image.map((imgSrc, index) => (
+                          {Array.isArray(d.image) && d.image.length > 0 ? (
+                            d.image.map((imgSrc, index) => (
                               <div key={index}>
                                 <Image
-                                  height={300}
-                                  width={`100%`}
+                                  height={200}
+                                  width="100%"
                                   src={imgSrc}
                                   alt={`Slide ${index + 1}`}
                                   style={{
@@ -303,7 +315,18 @@ function Home() {
                                   }}
                                 />
                               </div>
-                            ))}
+                            ))
+                          ) : (
+                            <Image
+                              height={206}
+                              width="100%"
+                              src={noPic}
+                              alt="No Image Available"
+                              style={{
+                                objectFit: "contain",
+                              }}
+                            />
+                          )}
                           </Carousel>
                         </Badge.Ribbon>
                       }
@@ -366,7 +389,6 @@ function Home() {
                             {index < d.tags.length - 1 && (
                               <span
                                 style={{
-                                  fontSize: "1.1rem",
                                   marginRight: "8px",
                                   color: "#1678ff",
                                 }}
@@ -429,19 +451,31 @@ function Home() {
                         }}
                       >
                         <Carousel autoplay autoplaySpeed={2500} fade>
-                          {d.image.map((imgSrc, index) => (
-                            <div key={index}>
-                              <Image
-                                height={300}
-                                width={`100%`}
-                                src={imgSrc}
-                                alt={`Slide ${index + 1}`}
-                                style={{
-                                  objectFit: "cover",
-                                }}
-                              />
-                            </div>
-                          ))}
+                        {Array.isArray(d.image) && d.image.length > 0 ? (
+                            d.image.map((imgSrc, index) => (
+                              <div key={index}>
+                                <Image
+                                  height={200}
+                                  width="100%"
+                                  src={imgSrc}
+                                  alt={`Slide ${index + 1}`}
+                                  style={{
+                                    objectFit: "cover",
+                                  }}
+                                />
+                              </div>
+                            ))
+                          ) : (
+                            <Image
+                              height={206}
+                              width="100%"
+                              src={noPic}
+                              alt="No Image Available"
+                              style={{
+                                objectFit: "contain",
+                              }}
+                            />
+                          )}
                         </Carousel>
                       </Badge.Ribbon>
                     }
@@ -491,12 +525,11 @@ function Home() {
                     <Button
                       type="primary"
                       block
-                      style={{ marginTop: "8px", marginBottom: "14px" }}
+                      style={{ marginTop: "8px", marginBottom: "15px" }}
                       onClick={() => viewDetails(d, d._id)}
                     >
                       View Details
-                    </Button>{" "}
-                    <br />
+                    </Button>
                     <Card.Meta
                       description={d.tags.map((t, index) => (
                         <React.Fragment key={index}>
@@ -504,7 +537,6 @@ function Home() {
                           {index < d.tags.length - 1 && (
                             <span
                               style={{
-                                fontSize: "1.1rem",
                                 marginRight: "8px",
                                 color: "#1678ff",
                               }}

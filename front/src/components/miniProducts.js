@@ -26,6 +26,10 @@ import Loader from "./loader";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import noPic from "../assets/images/nopic.png";
+import { format } from "date-fns";
+
+const currentDate = new Date().toISOString().split("T")[0];
 
 function MiniProducts() {
   const hostname = window.location.hostname;
@@ -252,27 +256,45 @@ function MiniProducts() {
                     hoverable
                     cover={
                       <Badge.Ribbon
-                        text="Special Offer"
+                        text="Special Offer!"
                         color="yellow"
                         style={{
-                          display: d.hasOffer ? "block" : "none",
+                          display:
+                            d.hasOffer &&
+                            format(new Date(d.offerStartDate), "yyyy-MM-dd") <= currentDate && 
+                            format(new Date(d.offerEndDate), "yyyy-MM-dd") > currentDate 
+                              ? "block"
+                              : "none",
                           right: "10px",
                         }}
+                        
                       >
                         <Carousel autoplay autoplaySpeed={2500} fade>
-                          {d.image.map((imgSrc, index) => (
-                            <div key={index}>
-                              <Image
-                                height={300}
-                                width={`100%`}
-                                src={imgSrc}
-                                alt={`Slide ${index + 1}`}
-                                style={{
-                                  objectFit: "cover",
-                                }}
-                              />
-                            </div>
-                          ))}
+                          {Array.isArray(d.image) && d.image.length > 0 ? (
+                            d.image.map((imgSrc, index) => (
+                              <div key={index}>
+                                <Image
+                                  height={200}
+                                  width="100%"
+                                  src={imgSrc}
+                                  alt={`Slide ${index + 1}`}
+                                  style={{
+                                    objectFit: "cover",
+                                  }}
+                                />
+                              </div>
+                            ))
+                          ) : (
+                            <Image
+                              height={206}
+                              width="100%"
+                              src={noPic}
+                              alt="No Image Available"
+                              style={{
+                                objectFit: "contain",
+                              }}
+                            />
+                          )}
                         </Carousel>
                       </Badge.Ribbon>
                     }
@@ -335,7 +357,6 @@ function MiniProducts() {
                           {index < d.tags.length - 1 && (
                             <span
                               style={{
-                                fontSize: "1.1rem",
                                 marginRight: "8px",
                                 color: "#1678ff",
                               }}

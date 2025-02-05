@@ -20,6 +20,7 @@ import "../assets/css/productModal.css";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
+import noPic from "../assets/images/nopic.png";
 
 const { Title, Text } = Typography;
 const currentDate = new Date().toISOString().split("T")[0];
@@ -84,25 +85,40 @@ function ProductModal({ details, visible, closeDetailsModal }) {
         {/* Left Side: Image Carousel */}
         <Col xs={24} md={10}>
           {/* Offer Countdown & Dates */}
-          {details.offerStartDate > currentDate ? (
+          {format(new Date(details.offerStartDate), "yyyy-MM-dd") >
+          currentDate ? (
             <CountDownToStart startTime={details.offerStartDate} />
-          ) : (
+          ) : format(new Date(details.offerEndDate), "yyyy-MM-dd") >
+            currentDate ? (
             <CountDownToEnd endTime={details.offerEndDate} />
-          )}
+          ) : null}
+
           <Carousel autoplay autoplaySpeed={2500} effect="fade" arrows>
-            {details.image.map((imgSrc, index) => (
-              <div key={index}>
-                <Image
-                  width="100%"
-                  height={350}
-                  style={{
-                    objectFit: "contain",
-                  }}
-                  src={imgSrc}
-                  alt={`Slide ${index + 1}`}
-                />
-              </div>
-            ))}
+            {Array.isArray(details.image) && details.image.length > 0 ? (
+              details.image.map((imgSrc, index) => (
+                <div key={index}>
+                  <Image
+                    height={350}
+                    width="100%"
+                    src={imgSrc}
+                    alt={`Slide ${index + 1}`}
+                    style={{
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              ))
+            ) : (
+              <Image
+                height={350}
+                width="100%"
+                src={noPic}
+                alt="No Image Available"
+                style={{
+                  objectFit: "contain",
+                }}
+              />
+            )}
           </Carousel>
         </Col>
 
@@ -163,14 +179,16 @@ function ProductModal({ details, visible, closeDetailsModal }) {
                     ).toLocaleString()}
                   </strong>
                   <Alert
-  type="success"
-  showIcon
-  message={`Save Ksh. ${(
-    Number(details.price) * (Number(details.discount) / 100)
-  ).toFixed(2).toLocaleString()}`}
-  style={{ width: "30%", color: "#4bbe11" }}
-/>
-
+                    type="success"
+                    showIcon
+                    message={`Save Ksh. ${(
+                      Number(details.price) *
+                      (Number(details.discount) / 100)
+                    )
+                      .toFixed(2)
+                      .toLocaleString()}`}
+                    style={{ width: "30%", color: "#4bbe11" }}
+                  />
                 </Text>
               </div>
             ) : (
