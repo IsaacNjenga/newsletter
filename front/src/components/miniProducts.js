@@ -124,9 +124,12 @@ function MiniProducts() {
       <>
         <FloatButton.Group
           shape="circle"
-          style={{ insetInlineEnd: 24 + 70 }}
-        ></FloatButton.Group>
-        <FloatButton.Group shape="circle" placement="left">
+          placement="left"
+          style={{
+            left: 20,
+            right: "auto",
+          }}
+        >
           <nav
             className={`side-navigation ${
               isExpanded ? "expanded" : "collapsed"
@@ -145,12 +148,7 @@ function MiniProducts() {
                   displaySet("Office Furniture", "Office Furniture")
                 }
               >
-                <img
-                  src={officeChair}
-                  alt="office-chair"
-                  className="icon"
-                  title="Office Furniture"
-                />
+                <img src={officeChair} alt="office-chair" className="icon" />
                 {isExpanded && (
                   <p className="icon-description">Office Furniture</p>
                 )}
@@ -158,23 +156,13 @@ function MiniProducts() {
               <li
                 onClick={() => displaySet("Home Furniture", "Home Furniture")}
               >
-                <img
-                  src={homeChair}
-                  alt="home-chair"
-                  className="icon"
-                  title="Home Furniture"
-                />
+                <img src={homeChair} alt="home-chair" className="icon" />
                 {isExpanded && (
                   <p className="icon-description">Home Furniture</p>
                 )}
               </li>
               <li onClick={() => displaySet("Electronics", "Electronics")}>
-                <img
-                  src={electronics}
-                  alt="electronics"
-                  className="icon"
-                  title="Electronics"
-                />
+                <img src={electronics} alt="electronics" className="icon" />
                 {isExpanded && <p className="icon-description">Electronics</p>}
               </li>
               <li
@@ -182,23 +170,13 @@ function MiniProducts() {
                   displaySet("Second-Hand Items", "Second Hand Items")
                 }
               >
-                <img
-                  src={secondHand}
-                  alt="second-hand"
-                  className="icon"
-                  title="Second-Hand Items"
-                />
+                <img src={secondHand} alt="second-hand" className="icon" />
                 {isExpanded && (
                   <p className="icon-description">Second-Hand Items</p>
                 )}
               </li>
               <li onClick={() => displaySet("Accessories", "Accessories")}>
-                <img
-                  src={accessory}
-                  alt="accessory"
-                  className="icon"
-                  title="Accessories"
-                />
+                <img src={accessory} alt="accessory" className="icon" />
                 {isExpanded && <p className="icon-description">Accessories</p>}
               </li>
             </ul>
@@ -206,6 +184,7 @@ function MiniProducts() {
           <FloatButton.BackTop visibilityHeight={0} title="Back to top" />
         </FloatButton.Group>
       </>
+
       {/* <nav
         className={`side-navigation ${isExpanded ? "expanded" : "collapsed"}`}
       >
@@ -261,13 +240,14 @@ function MiniProducts() {
                         style={{
                           display:
                             d.hasOffer &&
-                            format(new Date(d.offerStartDate), "yyyy-MM-dd") <= currentDate && 
-                            format(new Date(d.offerEndDate), "yyyy-MM-dd") > currentDate 
+                            format(new Date(d.offerStartDate), "yyyy-MM-dd") <=
+                              currentDate &&
+                            format(new Date(d.offerEndDate), "yyyy-MM-dd") >
+                              currentDate
                               ? "block"
                               : "none",
                           right: "10px",
                         }}
-                        
                       >
                         <Carousel autoplay autoplaySpeed={2500} fade>
                           {Array.isArray(d.image) && d.image.length > 0 ? (
