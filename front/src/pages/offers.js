@@ -117,7 +117,7 @@ function Offers() {
       <div className="navbar-element">
         <Navbar />
       </div>
-      <Search />
+      {/* <Search /> */}
       <div className="offers-container">
         <header className="offers-header">
           <h1>Special Offers</h1>

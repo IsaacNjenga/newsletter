@@ -552,7 +552,6 @@ function Home() {
           visible={details}
           closeDetailsModal={closeDetailsModal}
         />
-        <Offers offered={offered} />
 
         <Footer />
       </div>
