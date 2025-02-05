@@ -28,6 +28,7 @@ export const statusData = [
   { status: "Discontinued", name: "Discontinued" },
   { status: "Out of Stock", name: "Out of Stock" },
   { status: "Upcoming", name: "Upcoming" },
+  { status: "Brand New", name: "Brand New" },
 ];
 
 export const homeFurnitureTags = [
@@ -48,7 +49,8 @@ export const officeFurnitureTags = [
   "Office Chair",
   "Bookshelf",
   "Filing Cabinet",
-  "Meeting Table","Executive Seat"
+  "Meeting Table",
+  "Executive Seat",
 ];
 
 export const electronicsTags = [
@@ -89,7 +91,7 @@ export const itemColours = [
   "Silver",
   "Gold",
   "Beige",
-  "Maroon"
+  "Maroon",
 ];
 
 export const officeFurnitureData = [

@@ -264,6 +264,7 @@ function MiniProducts() {
                             <div key={index}>
                               <Image
                                 height={300}
+                                width={`100%`}
                                 src={imgSrc}
                                 alt={`Slide ${index + 1}`}
                                 style={{

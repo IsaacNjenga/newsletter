@@ -25,7 +25,13 @@ const productSchema = new mongoose.Schema(
     availableColours: { type: [String] },
     status: {
       type: String,
-      enum: ["Available", "Out of Stock", "Discontinued", "Upcoming"],
+      enum: [
+        "Available",
+        "Out of Stock",
+        "Discontinued",
+        "Upcoming",
+        "Brand New",
+      ],
       default: "Available",
     },
     offerStartDate: { type: Date },
