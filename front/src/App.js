@@ -8,9 +8,12 @@ import Products from "./pages/products";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import UpdateProduct from "./components/updateProduct";
+import AddProduct from "./components/addProduct";
+import Admin from "./pages/admin";
 
 //axios.defaults.baseURL = "http://localhost:3001/EasyDeal";
-axios.defaults.baseURL =  "https://valuemart-furniture-server.vercel.app/EasyDeal";
+axios.defaults.baseURL =
+  "https://valuemart-furniture-server.vercel.app/EasyDeal";
 axios.defaults.withCredentials = true;
 function App() {
   return (
@@ -22,7 +25,9 @@ function App() {
           <Route path="/offers" element={<Offers />} />
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/add-product" element={<AddProduct />} />
           <Route path="/update-product/:id" element={<UpdateProduct />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
         <Toaster position="top-right" toastOption={{ duration: 2200 }} />
       </BrowserRouter>

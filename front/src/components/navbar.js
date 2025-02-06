@@ -3,6 +3,7 @@ import "../assets/css/navbar.css";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+  const hostname = window.location.hostname;
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -37,6 +38,11 @@ function Navbar() {
         <li>
           <Link to="/contact">Contact Us</Link>
         </li>
+        {hostname === "admin.localhost" ? (
+          <li>
+            <Link to="/add-product">Add Product</Link>
+          </li>
+        ) : null}
       </ul>
     </nav>
   );

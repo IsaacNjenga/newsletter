@@ -13,10 +13,12 @@ import {
   secondHandItemsTags,
   statusData,
 } from "../assets/data/data.js";
-import { Button, Col, Image, Row, Tag } from "antd";
+import { Col, Image, Row, Tag } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [imageUrls, setImageUrls] = useState([]);
   const [imagePublicIds, setImagePublicIds] = useState([]);
@@ -231,6 +233,7 @@ function AddProduct() {
         });
         setImageUrls([]);
         setImagePublicIds([]);
+        navigate("/products");
       }
     } catch (error) {
       console.error("Error:", error);
